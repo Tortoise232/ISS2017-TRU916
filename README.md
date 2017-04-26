@@ -6,7 +6,7 @@
 - To get the develop branch write git _"pull --rebase origin developementDatabase_" and after that "_git checkout develop_"
 
 - Use Import Project form InteliJ and add the first 2 options for the project and check **Use Default Gradle Wrapper**,
-choose the creation folder the folder you cloned the repository.
+choose the creation folder (the folder you cloned the repository).
 
 - Navigate into the project directory  in **WebConference>src>main>webapp**  and  open a Terminal (Linux)/CMD (Windows), in that folder,  and run the command "_npm install_"
 
