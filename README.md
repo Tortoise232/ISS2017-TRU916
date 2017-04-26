@@ -3,7 +3,7 @@
 
 - Enter in the folder.
 
-- To get the develop branch write git _"pull --rebase origin develop_" and after that "_git checkout develop_"
+- To get the develop branch write git _"pull --rebase origin developementDatabase_" and after that "_git checkout develop_"
 
 - Use Import Project form InteliJ and add the first 2 options for the project and check **Use Default Gradle Wrapper**,
 choose the creation folder the folder you cloned the repository.
