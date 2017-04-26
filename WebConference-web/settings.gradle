@@ -1,0 +1,2 @@
+include(':WebConference-core')
+project(':WebConference-core').projectDir=new File(settingsDir,'../WebConference-core')
