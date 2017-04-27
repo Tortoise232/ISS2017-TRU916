@@ -9,13 +9,13 @@ import java.util.Set;
  * Created by cata on 27.04.2017.
  */
 @Entity
-@Table(name="conference")
+@Table(name = "conference")
 public class Conference extends BaseEntity<Long> {
 
-    @Column(name="name",nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "date",nullable = false)
+    @Column(name = "date", nullable = false)
     private Date date;
 
     @OneToMany(fetch = FetchType.LAZY)
@@ -36,10 +36,10 @@ public class Conference extends BaseEntity<Long> {
     public Conference(String name, Date date) {
         this.name = name;
         this.date = date;
-        papers=new HashSet<>();
-        reviewers=new HashSet<>();
-        speakers=new HashSet<>();
-        acceptedpapers=new HashSet<>();
+        papers = new HashSet<>();
+        reviewers = new HashSet<>();
+        speakers = new HashSet<>();
+        acceptedpapers = new HashSet<>();
     }
 
     public String getName() {

@@ -8,19 +8,19 @@ import java.util.Set;
  * Created by cata on 27.04.2017.
  */
 @Entity
-@Table(name="paper")
+@Table(name = "paper")
 public class Paper extends BaseEntity<Long> {
 
-    @Column(name="name",nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name="grade")
+    @Column(name = "grade")
     private Float grade;
 
-    @Column(name="path",nullable = false)
+    @Column(name = "path", nullable = false)
     private String path;
 
-    @Column(name="eventid",nullable = false)
+    @Column(name = "eventid", nullable = false)
     private Long evetid;
 
     @Id
