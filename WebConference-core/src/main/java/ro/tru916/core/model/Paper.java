@@ -29,8 +29,14 @@ public class Paper extends BaseEntity<Long> {
     private Set<User> owners=new HashSet<User>();
 
     @Id
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinTable(name="CONFERENCE_PAPER")
     private Conference paper;
+
+    @Id
+    @JoinTable(name = "CONFERENCE_ACCEPTED_PAPERS")
+    @OneToMany(fetch = FetchType.EAGER)
+    private Conference accepted;
 
     public Paper() {
     }

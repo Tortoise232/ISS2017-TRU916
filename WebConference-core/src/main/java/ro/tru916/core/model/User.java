@@ -38,11 +38,13 @@ public class User extends BaseEntity<Long> {
     private Set<Paper> papers=new HashSet<Paper>();
 
     @Id
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinTable(name = "CONFERENCE_REVIEWERS")
     private Conference reviewer;
 
     @Id
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinTable(name = "CONFERENCE_SPEAKERS")
     private Conference speaker;
 
     public User() {

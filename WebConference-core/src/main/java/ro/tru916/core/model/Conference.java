@@ -19,22 +19,22 @@ public class Conference extends BaseEntity<Long> {
     private Date date;
 
     @Id
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "CONFERENCE_PAPERS", joinColumns = {@JoinColumn(name = "CONFERENCE_ID")}, inverseJoinColumns = {@JoinColumn(name = "PAPER_ID")})
     private Set<Paper> papers = new HashSet<>();
 
     @Id
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "CONFERENCE_REVIEWERS", joinColumns = {@JoinColumn(name = "CONFERENCE_ID")}, inverseJoinColumns = {@JoinColumn(name = "USER_ID")})
     private Set<User> reviewers = new HashSet<>();
 
     @Id
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "CONFERENCE_SPEAKERS", joinColumns = {@JoinColumn(name = "CONFERENCE_ID")}, inverseJoinColumns = {@JoinColumn(name = "USER_ID")})
     private Set<User> speakers = new HashSet<>();
 
     @Id
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "CONFERENCE_ACCEPTED_PAPERS", joinColumns = {@JoinColumn(name = "CONFERENCE_ID")}, inverseJoinColumns = {@JoinColumn(name = "PAPER_ID")})
     private Set<Paper> acceptedpapers = new HashSet<>();
 
