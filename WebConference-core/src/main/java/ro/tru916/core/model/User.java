@@ -3,6 +3,7 @@ package ro.tru916.core.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -32,18 +33,30 @@ public class User extends BaseEntity<Long> {
     private String type;
 
     @Id
-    @OneToMany(fetch = FetchType.LAZY)
-    private Set<Paper> papers;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name="PAPER_USER",joinColumns={@JoinColumn(name="USER_ID")},inverseJoinColumns = {@JoinColumn(name="PAPER_ID")})
+    private Set<Paper> papers=new HashSet<Paper>();
+
+    @Id
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Conference reviewer;
+
+    @Id
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Conference speaker;
 
     public User() {
     }
 
-    public User(String name, String password, String username, Date registerdate, String email) {
+    public User(String name, String password, String username, Date registerdate, String email, String type, Conference reviewer, Conference speaker) {
         this.name = name;
         this.password = password;
         this.username = username;
         this.registerdate = registerdate;
         this.email = email;
+        this.type = type;
+        this.reviewer = reviewer;
+        this.speaker = speaker;
     }
 
     public String getType() {

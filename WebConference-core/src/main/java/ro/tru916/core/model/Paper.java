@@ -24,8 +24,13 @@ public class Paper extends BaseEntity<Long> {
     private Long evetid;
 
     @Id
-    @ManyToMany(fetch = FetchType.LAZY)
-    private Set<User> owners;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name="PAPER_USER",inverseJoinColumns={@JoinColumn(name="USER_ID")},joinColumns = {@JoinColumn(name="PAPER_ID")})
+    private Set<User> owners=new HashSet<User>();
+
+    @Id
+    @OneToMany(fetch = FetchType.LAZY)
+    private Conference paper;
 
     public Paper() {
     }
@@ -36,7 +41,6 @@ public class Paper extends BaseEntity<Long> {
         this.grade = grade;
         this.path = path;
         this.evetid = evetid;
-        this.owners = new HashSet<User>();
     }
 
     public String getName() {
