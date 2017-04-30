@@ -8,7 +8,7 @@ import java.util.Set;
  * Created by cata on 27.04.2017.
  */
 @Entity
-@Table(name = "paper")
+@Table(name = "Paper")
 public class Paper extends BaseEntity<Long> {
 
     @Column(name = "name", nullable = false)
@@ -23,19 +23,16 @@ public class Paper extends BaseEntity<Long> {
     @Column(name = "eventid", nullable = false)
     private Long evetid;
 
-    @Id
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name="PAPER_USER",inverseJoinColumns={@JoinColumn(name="USER_ID")},joinColumns = {@JoinColumn(name="PAPER_ID")})
+    @ManyToMany(mappedBy = "papers")
     private Set<User> owners=new HashSet<User>();
 
-    @Id
-    @OneToMany(fetch = FetchType.EAGER)
+
+    @ManyToOne
     @JoinTable(name="CONFERENCE_PAPER")
     private Conference paper;
 
-    @Id
+    @ManyToOne
     @JoinTable(name = "CONFERENCE_ACCEPTED_PAPERS")
-    @OneToMany(fetch = FetchType.EAGER)
     private Conference accepted;
 
     public Paper() {
@@ -47,6 +44,22 @@ public class Paper extends BaseEntity<Long> {
         this.grade = grade;
         this.path = path;
         this.evetid = evetid;
+    }
+
+    public Conference getPaper() {
+        return paper;
+    }
+
+    public void setPaper(Conference paper) {
+        this.paper = paper;
+    }
+
+    public Conference getAccepted() {
+        return accepted;
+    }
+
+    public void setAccepted(Conference accepted) {
+        this.accepted = accepted;
     }
 
     public String getName() {
