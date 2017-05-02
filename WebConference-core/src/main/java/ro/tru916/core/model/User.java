@@ -3,13 +3,14 @@ package ro.tru916.core.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
  * Created by cata on 27.04.2017.
  */
 @Entity
-@Table(name = "user")
+@Table(name = "Userss")
 //@Data
 public class User extends BaseEntity<Long> {
 
@@ -31,19 +32,56 @@ public class User extends BaseEntity<Long> {
     @Column(name = "type", nullable = false)
     private String type;
 
-    @Id
-    @OneToMany(fetch = FetchType.LAZY)
-    private Set<Paper> papers;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name="PAPER_USER")
+    private Set<Paper> papers=new HashSet<Paper>();
+
+
+    @ManyToOne
+    @JoinTable(name = "CONFERENCE_REVIEWERS")
+    private Conference reviewer;
+
+
+    @ManyToOne
+    @JoinTable(name = "CONFERENCE_SPEAKERS")
+    private Conference speaker;
 
     public User() {
     }
 
-    public User(String name, String password, String username, Date registerdate, String email) {
+    public User(String name, String password, String username, Date registerdate, String email, String type) {
         this.name = name;
         this.password = password;
         this.username = username;
         this.registerdate = registerdate;
         this.email = email;
+        this.type = type;
+
+    }
+
+    public Set<Paper> getPapers() {
+        return papers;
+    }
+
+    public void setPapers(Set<Paper> papers) {
+        this.papers = papers;
+    }
+
+    public Conference getReviewer() {
+        return reviewer;
+    }
+
+    public void setReviewer(Conference reviewer) {
+        this.reviewer = reviewer;
+    }
+
+    public Conference getSpeaker() {
+        return speaker;
+    }
+
+    public void setSpeaker(Conference speaker) {
+        this.speaker = speaker;
     }
 
     public String getType() {

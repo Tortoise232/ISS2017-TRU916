@@ -1,6 +1,9 @@
 package ro.tru916.core.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,7 +12,7 @@ import java.util.Set;
  * Created by cata on 27.04.2017.
  */
 @Entity
-@Table(name = "conference")
+@Table(name = "Conference")
 public class Conference extends BaseEntity<Long> {
 
     @Column(name = "name", nullable = false)
@@ -18,17 +21,20 @@ public class Conference extends BaseEntity<Long> {
     @Column(name = "date", nullable = false)
     private Date date;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    private Set<Paper> papers;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    private Set<User> reviewers;
+    @OneToMany(mappedBy = "paper")
+    private Set<Paper> papers = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY)
-    private Set<User> speakers;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    private Set<Paper> acceptedpapers;
+    @OneToMany(mappedBy = "reviewer")
+    private Set<User> reviewers = new HashSet<>();
+
+
+    @OneToMany(mappedBy = "speaker")
+    private Set<User> speakers = new HashSet<>();
+
+    @OneToMany(mappedBy = "accepted")
+    private Set<Paper> acceptedpapers = new HashSet<>();
 
     public Conference() {
     }
@@ -36,11 +42,8 @@ public class Conference extends BaseEntity<Long> {
     public Conference(String name, Date date) {
         this.name = name;
         this.date = date;
-        papers = new HashSet<>();
-        reviewers = new HashSet<>();
-        speakers = new HashSet<>();
-        acceptedpapers = new HashSet<>();
     }
+
 
     public String getName() {
         return name;

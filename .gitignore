@@ -4,6 +4,7 @@ bin
 *.log
 dist
 node_modules
+lib
 
 # Eclipse
 .classpath
@@ -27,3 +28,5 @@ gradle
 
 #angular
 node_modules
+
+db.properties
