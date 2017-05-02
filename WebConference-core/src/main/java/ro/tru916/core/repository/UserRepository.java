@@ -1,5 +1,7 @@
 package ro.tru916.core.repository;
 
+import org.springframework.data.repository.NoRepositoryBean;
+import org.springframework.transaction.annotation.Transactional;
 import ro.tru916.core.model.User;
 
 /**
