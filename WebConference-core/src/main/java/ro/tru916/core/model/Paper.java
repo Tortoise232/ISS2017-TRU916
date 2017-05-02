@@ -21,11 +21,10 @@ public class Paper extends BaseEntity<Long> {
     private String path;
 
     @Column(name = "eventid", nullable = false)
-    private Long evetid;
+    private Long eventid;
 
     @ManyToMany(mappedBy = "papers")
     private Set<User> owners=new HashSet<User>();
-
 
     @ManyToOne
     @JoinTable(name="CONFERENCE_PAPER")
@@ -38,12 +37,11 @@ public class Paper extends BaseEntity<Long> {
     public Paper() {
     }
 
-
-    public Paper(String name, Float grade, String path, Long evetid) {
+    public Paper(String name, Float grade, String path, Long eventid) {
         this.name = name;
         this.grade = grade;
         this.path = path;
-        this.evetid = evetid;
+        this.eventid = eventid;
     }
 
     public Conference getPaper() {
@@ -95,14 +93,13 @@ public class Paper extends BaseEntity<Long> {
     }
 
     public Long getEvetid() {
-        return evetid;
+        return eventid;
     }
 
-    public void setEvetid(Long evetid) {
-        this.evetid = evetid;
+    public void setEvetid(Long eventid) {
+        this.eventid = eventid;
     }
-
-
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -113,7 +110,7 @@ public class Paper extends BaseEntity<Long> {
         if (name != null ? !name.equals(paper.name) : paper.name != null) return false;
         if (grade != null ? !grade.equals(paper.grade) : paper.grade != null) return false;
         if (path != null ? !path.equals(paper.path) : paper.path != null) return false;
-        if (evetid != null ? !evetid.equals(paper.evetid) : paper.evetid != null) return false;
+        if (eventid != null ? !eventid.equals(paper.eventid) : paper.eventid != null) return false;
         return owners != null ? owners.equals(paper.owners) : paper.owners == null;
     }
 
@@ -122,7 +119,7 @@ public class Paper extends BaseEntity<Long> {
         int result = name != null ? name.hashCode() : 0;
         result = 31 * result + (grade != null ? grade.hashCode() : 0);
         result = 31 * result + (path != null ? path.hashCode() : 0);
-        result = 31 * result + (evetid != null ? evetid.hashCode() : 0);
+        result = 31 * result + (eventid != null ? eventid.hashCode() : 0);
         result = 31 * result + (owners != null ? owners.hashCode() : 0);
         return result;
     }
@@ -133,7 +130,7 @@ public class Paper extends BaseEntity<Long> {
                 "name='" + name + '\'' +
                 ", grade=" + grade +
                 ", path='" + path + '\'' +
-                ", evetid=" + evetid +
+                ", eventid=" + eventid +
                 ", owners=" + owners +
                 '}';
     }

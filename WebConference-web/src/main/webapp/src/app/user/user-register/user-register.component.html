@@ -1,0 +1,22 @@
+<h3>Register</h3>
+
+<div>
+    <label>Name: </label>
+    <input #name/>
+</div>
+<div>
+    <label>Username: </label>
+    <input #username>
+</div>
+<div>
+    <label>Email: </label>
+    <input #email >
+</div>
+<div>
+    <label>Password: </label>
+    <input type="password" #password >
+</div>
+<div>
+    <button (click)="goBack()">Back</button>
+    <button (click)="register(name.value, password.value, username.value, email.value)">Create Account</button>
+</div>
