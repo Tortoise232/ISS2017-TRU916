@@ -20,13 +20,16 @@ export class RegisterUserComponent {
     }
 
     register(name, password, username, email): void {
-        console.log("register: ", name, password, username, email);
+        /*
+        console.log("register");
         if (!name || !password || !username || !email) {
             console.log("all fields are required");
             alert("All fields are required!");
             return;
         }
-        this.userService.register(name, password, username, email)
+        */
+        var encodedPassword = btoa(password);
+        this.userService.register(name, encodedPassword, username, email)
             .subscribe(_ => this.goBack());
     }
 }

@@ -9,7 +9,6 @@ public class UserDto extends BaseDto {
     private String username;
     private String email;
 
-
     public UserDto(String name, byte[] password, String username, String email) {
         this.name = name;
         this.password = password;
@@ -18,7 +17,6 @@ public class UserDto extends BaseDto {
     }
 
     public UserDto() {}
-
 
     public String getName() {
         return name;
@@ -40,9 +38,7 @@ public class UserDto extends BaseDto {
         this.name = name;
     }
 
-    public void setPassword(byte[] password) {
-        this.password = password;
-    }
+    public void setPassword(byte[] password) {this.password = password;}
 
     public void setUsername(String username) {
         this.username = username;

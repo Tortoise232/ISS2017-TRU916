@@ -11,18 +11,13 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class UserService {
     private registerUrl = 'http://localhost:8080/api/register';
-    private headers = new Headers({'Content-Type': 'application/json'});
+    private headers = new Headers({'Content-Type': 'application/json;charset=UTF-8'});
 
     constructor(private http: Http) {
     }
 
-    private extractData(res: Response) {
-        let body = res.json();
-        return body.users || {};
-    }
-
     private handleError(error: Response | any) {
-        console.log("errrrrrrrrrrrrrrrrr");
+        console.log("error");
         let errMsg: string;
         if (error instanceof Response) {
             const body = error.json() || '';
@@ -40,7 +35,7 @@ export class UserService {
         return body.response || {};
     }
 
-    register(name: string, password: string, username: string, email:string): Observable<User> {
+    register(name: string, password: string, username: string, email:string): Observable<string> {
         let user = {name, password, username, email};
         return this.http
             .post(this.registerUrl, JSON.stringify({"user": user}), {headers: this.headers})

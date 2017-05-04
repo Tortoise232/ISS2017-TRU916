@@ -1,22 +1,33 @@
-<h3>Register</h3>
-
-<div>
-    <label>Name: </label>
-    <input #name/>
+<!DOCTYPE html>
+<html>
+<head>
+  <style type="text/css">
+    .center_div{
+      width:25%;
+    }
+  </style>
+</head>
+<body>
+<div class="container center_div">
+  <form>
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input class="form-control" id="name" #name required>
+    </div>
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input class="form-control" id="username" #username required>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" #email required>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="password" #password required>
+    </div>
+    <button type="submit" class="btn btn-primary" (click)="register(name.value, password.value, username.value, email.value)">Submit</button>
+  </form>
 </div>
-<div>
-    <label>Username: </label>
-    <input #username>
-</div>
-<div>
-    <label>Email: </label>
-    <input #email >
-</div>
-<div>
-    <label>Password: </label>
-    <input type="password" #password >
-</div>
-<div>
-    <button (click)="goBack()">Back</button>
-    <button (click)="register(name.value, password.value, username.value, email.value)">Create Account</button>
-</div>
+</body>
+</html>

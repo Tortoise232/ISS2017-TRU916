@@ -99,7 +99,7 @@ public class Paper extends BaseEntity<Long> {
     public void setEvetid(Long eventid) {
         this.eventid = eventid;
     }
-    
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
