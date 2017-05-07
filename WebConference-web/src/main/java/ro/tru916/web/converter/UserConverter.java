@@ -15,7 +15,7 @@ public class UserConverter extends BaseConverter<User, UserDto> {
 
     @Override
     public UserDto convertModelToDto(User user) {
-        byte[] password = new byte[10];
+        byte[] password = new byte[6];
         UserDto userDto = new UserDto(user.getName(), password, user.getUsername(), user.getEmail());
         userDto.setId(user.getId());
         return userDto;

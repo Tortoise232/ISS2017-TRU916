@@ -1,28 +1,27 @@
+/**
+ * Created by tudor on 06-May-17.
+ */
 import {Component} from "@angular/core";
 import {Location} from '@angular/common';
 import {Router} from "@angular/router";
 
-import {UserService} from "../shared/user.service";
+import {ConferenceService} from "../shared/conference.service";
 
 @Component({
-    moduleId: module.id,
-    selector: 'register',
-    templateUrl: './user-register.component.html',
-    styleUrls: ['./user-register.component.css'],
+  moduleId: module.id,
+  selector: 'register',
+  templateUrl: './conference-register.component.html',
+  styleUrls: ['./conference-register.component.css'],
 })
 
-export class RegisterUserComponent {
-  constructor(private userService: UserService,
+export class RegisterConferenceComponent {
+  constructor(private conferenceService: ConferenceService,
               private location: Location,
               private router: Router) {
   }
 
   goBack(): void {
     this.location.back();
-  }
-
-  gotoLogin(): void {
-    this.router.navigate(['login']);
   }
 
   showRegistrationStatus(status: string): void{
@@ -38,42 +37,32 @@ export class RegisterUserComponent {
     }
   }
 
-  register(name, password, username, email): void {
+  register(name, date): void {
     console.log("register");
 
     let required = document.getElementById("required");
-    let invalidEmail = document.getElementById("invalid-email");
-    let invalidPassword = document.getElementById("invalid-password");
+    let invalidDate = document.getElementById("invalid-date");
     let success = document.getElementById("success");
     let failure = document.getElementById("failure");
     required.style.display = "none";
-    invalidEmail.style.display = "none";
-    invalidPassword.style.display = "none";
+    invalidDate.style.display = "none";
     success.style.display = "none";
     failure.style.display = "none";
 
-    if (!name || !password || !username || !email) {
+    if (!name || !date) {
       console.log("All fields are required!");
       required.style.display = "block";
       return;
     }
 
-    let emailPattern = /\S+@\S+\.\S+/;
-    if(!emailPattern.test(email)) {
-      console.log("Invalid email!");
-      invalidEmail.style.display = "block";
+    let datePattern = /^[0-3]?[0-9]\/[01]?[0-9]\/[12][90][0-9][0-9]$/;
+    if(!datePattern.test(date)) {
+      console.log("Invalid date format used!");
+      invalidDate.style.display = "block";
       return;
     }
 
-    let minPasswordLength = 6;
-    if(password.length < minPasswordLength){
-      console.log("Invalid password!");
-      invalidPassword.style.display = "block";
-      return;
-    }
-
-    let encodedPassword = btoa(password);
-    this.userService.register(name, encodedPassword, username, email)
+    this.conferenceService.register(name, date)
       .subscribe(s => this.showRegistrationStatus(s))
   }
 }

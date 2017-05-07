@@ -10,11 +10,14 @@ import {RegisterUserComponent} from "./user/user-register/user-register.componen
 import {UserService} from "./user/shared/user.service";
 import {HomeComponent} from "./home/home.component";
 import {LoginComponent} from "./login/login.component";
+import {RegisterConferenceComponent} from "./conference/conference-register/conference-register.component";
+import {ConferenceService} from "./conference/shared/conference.service";
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterUserComponent,
+    RegisterConferenceComponent,
     HomeComponent,
     LoginComponent
   ],
@@ -24,7 +27,7 @@ import {LoginComponent} from "./login/login.component";
     HttpModule,
     AppRoutingModule
   ],
-  providers: [UserService],
+  providers: [UserService,ConferenceService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

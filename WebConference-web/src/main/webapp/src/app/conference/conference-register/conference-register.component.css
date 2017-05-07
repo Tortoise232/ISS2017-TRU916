@@ -1,0 +1,15 @@
+.center_div{
+  width: 25%;
+}
+#required{
+  display: none;
+}
+#invalid-date{
+  display: none;
+}
+#success{
+  display: none;
+}
+#failure{
+  display: none;
+}

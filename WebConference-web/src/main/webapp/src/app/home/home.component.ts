@@ -7,8 +7,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent{
-  constructor(private router: Router) {
-  }
+  constructor(private router: Router) {}
 
   gotoLogin(): void {
     this.router.navigate(['login']);
@@ -16,5 +15,9 @@ export class HomeComponent{
 
   gotoRegister(): void {
     this.router.navigate(['register']);
+  }
+
+  gotoRegisterConference(): void {
+    this.router.navigate(['registerconf']);
   }
 }

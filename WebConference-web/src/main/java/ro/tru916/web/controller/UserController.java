@@ -3,14 +3,18 @@ package ro.tru916.web.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import ro.tru916.core.service.UserService;
 import ro.tru916.web.converter.UserConverter;
+import ro.tru916.web.dto.EmptyJsonResponse;
 import ro.tru916.web.dto.UserDto;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -27,19 +31,19 @@ public class UserController {
     private UserConverter userConverter;
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String registerUser(@RequestBody final Map<String, UserDto> userDtoMap){
+    public ResponseEntity registerUser(@RequestBody final Map<String, UserDto> userDtoMap){
         log.trace("registerUser: userDtoMap={}", userDtoMap);
 
-        String message;
+        ResponseEntity response;
         UserDto userDto = userDtoMap.get("user");
         try {
             userService.addUser(userDto.getName(), userDto.getPassword(), userDto.getUsername(), userDto.getEmail());
-            message = "Account successfully created.";
+            response = new ResponseEntity(new EmptyJsonResponse(), HttpStatus.CREATED);
             log.trace("registerUser: successful");
         }catch (RuntimeException e){
-            message = e.getMessage();
+            response = new ResponseEntity(new EmptyJsonResponse(), HttpStatus.IM_USED);
             log.trace("registerUser: failed");
         }
-        return message;
+        return response;
     }
 }

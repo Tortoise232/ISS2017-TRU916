@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ro.tru916.core.model.User;
 import ro.tru916.core.repository.UserRepository;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -29,7 +30,7 @@ public class UserServiceImpl implements UserService {
     public void addUser(String name, byte[] password, String username, String email) throws RuntimeException {
         Date registerdate = Calendar.getInstance().getTime();
         String type = "basic";
-        String decodedPassword = new String( Base64.decodeBase64(password));
+        String decodedPassword = new String(password, StandardCharsets.UTF_8);
 
         log.trace("addUser: name={}, password={}, username={}, registerdate={}, email={}, type={}",
                 name, password, username, registerdate, email, type);
