@@ -1,22 +1,68 @@
-<h3>Register</h3>
-
-<div>
-    <label>Name: </label>
-    <input #name/>
+<!DOCTYPE html>
+<html>
+<head>
+  <style type="text/css">
+    .center_div{
+      width: 25%;
+    }
+    #required{
+      display: none;
+    }
+    #invalid-email{
+      display: none;
+    }
+    #invalid-password{
+      display: none;
+    }
+    #success{
+      display: none;
+    }
+    #failure{
+      display: none;
+    }
+  </style>
+</head>
+<body>
+<div class="container center_div">
+  <form id="register-form">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" #name>
+    </div>
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" class="form-control" id="username" #username>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" #email>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="password" #password>
+    </div>
+    <button type="submit" class="btn btn-primary" (click)="register(name.value, password.value, username.value, email.value)">Submit</button>
+  </form>
+  <br>
+  <div id="required" class="alert alert-danger">
+    <strong>All fields are required.</strong>
+  </div>
+  <div id="invalid-email" class="alert alert-danger">
+    <strong>Invalid email format.</strong>
+  </div>
+  <div id="invalid-password" class="alert alert-danger">
+    <strong>The password should contain at least 6 characters.</strong>
+  </div>
+  <div id="success">
+    <div class="alert alert-success">
+      <strong>Your account was successfully created.</strong>
+    </div>
+    <br>
+    <p>Do you want to <button (click)="gotoLogin()" type="button" class="btn btn-default">Login</button> right now?</p>
+  </div>
+  <div id="failure" class="alert alert-danger">
+    <strong>This username is already taken. Please choose another one.</strong>
+  </div>
 </div>
-<div>
-    <label>Username: </label>
-    <input #username>
-</div>
-<div>
-    <label>Email: </label>
-    <input #email >
-</div>
-<div>
-    <label>Password: </label>
-    <input type="password" #password >
-</div>
-<div>
-    <button (click)="goBack()">Back</button>
-    <button (click)="register(name.value, password.value, username.value, email.value)">Create Account</button>
-</div>
+</body>
+</html>

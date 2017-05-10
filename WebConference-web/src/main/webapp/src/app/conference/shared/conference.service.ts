@@ -1,3 +1,6 @@
+/**
+ * Created by tudor on 06-May-17.
+ */
 import {Injectable} from '@angular/core';
 import {Http, Response, Headers} from "@angular/http";
 
@@ -6,8 +9,8 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class UserService {
-  private registerUrl = 'http://localhost:8080/api/register';
+export class ConferenceService {
+  private conferenceUrl = 'http://localhost:8080/api/registerconf';
   private headers = new Headers({'Content-Type': 'application/json;charset=UTF-8'});
 
   constructor(private http: Http) {}
@@ -37,10 +40,10 @@ export class UserService {
     return status;
   }
 
-  register(name: string, password: string, username: string, email:string): Observable<string> {
-    let user = {name, password, username, email};
+  register(name: string, date: string): Observable<string> {
+    let conference = {name, date};
     return this.http
-      .post(this.registerUrl, JSON.stringify({"user": user}), {headers: this.headers})
+      .post(this.conferenceUrl, JSON.stringify({"conference": conference}), {headers: this.headers})
       .map(this.extractStatus)
       .catch(this.handleError);
   }
