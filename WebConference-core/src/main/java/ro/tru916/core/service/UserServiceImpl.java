@@ -1,16 +1,20 @@
 package ro.tru916.core.service;
 
+import org.apache.commons.codec.binary.Base64;
+import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ro.tru916.core.model.User;
 import ro.tru916.core.repository.UserRepository;
 
-import java.util.List;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
- * Created by cata on 28.04.2017.
+ * Created by Laura on 4/30/2017.
  */
 @Service
 public class UserServiceImpl implements UserService {
@@ -21,16 +25,24 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public List<User> findAll() {
-        log.trace("finAll--method entered");
-        return userRepository.findAll();
+    @Transactional
+    public void addUser(String name, byte[] password, String username, String email) throws RuntimeException {
+        Date registerdate = Calendar.getInstance().getTime();
+        String type = "basic";
+        String decodedPassword = new String( Base64.decodeBase64(password));
 
+        log.trace("addUser: name={}, password={}, username={}, registerdate={}, email={}, type={}",
+                name, password, username, registerdate, email, type);
+
+        User user = new User(name, decodedPassword, username, registerdate, email, type);
+        try {
+            userRepository.save(user);
+        }catch(ConstraintViolationException e){
+            throw new RuntimeException("Username must be unique.");
+        }
+
+        log.trace("addUser: user={}", user);
     }
-
-//    @Override
-//    public void addUser(User u) {
-//        userRepository.save(u);
-//    }
 
 
 }

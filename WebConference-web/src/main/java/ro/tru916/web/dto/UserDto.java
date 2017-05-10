@@ -1,27 +1,64 @@
 package ro.tru916.web.dto;
 
-import ro.tru916.core.model.User;
-
-import java.util.List;
-
 /**
- * Created by cata on 28.04.2017.
+ * Created by Laura on 5/2/2017.
  */
-public class UserDto {
-    private List<User> users;
+public class UserDto extends BaseDto {
+    private String name;
+    private byte[] password;
+    private String username;
+    private String email;
 
-    public UserDto() {
+
+    public UserDto(String name, byte[] password, String username, String email) {
+        this.name = name;
+        this.password = password;
+        this.username = username;
+        this.email = email;
     }
 
-    public UserDto(List<User> users) {
-        this.users = users;
+    public UserDto() {}
+
+
+    public String getName() {
+        return name;
     }
 
-    public List<User> getUsers() {
-        return users;
+    public byte[] getPassword() {
+        return password;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public String getUsername() {
+        return username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPassword(byte[] password) {
+        this.password = password;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDto{" +
+                "name='" + name + '\'' +
+                ", password='*****"+ '\'' +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }
