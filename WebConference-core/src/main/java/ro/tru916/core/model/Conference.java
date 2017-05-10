@@ -18,7 +18,7 @@ public class Conference extends BaseEntity<Long> {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "date", nullable = false)
+    @Column(name = "date", nullable = false, unique = true)
     private Date date;
 
 

@@ -16,4 +16,8 @@ export class HomeComponent{
   gotoRegister(): void {
     this.router.navigate(['register']);
   }
+
+  gotoRegisterConference(): void {
+    this.router.navigate(['registerconf']);
+  }
 }
