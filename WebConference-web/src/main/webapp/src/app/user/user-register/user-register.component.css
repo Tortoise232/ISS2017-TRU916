@@ -149,3 +149,19 @@ body {
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
 }
+
+/*#required{*/
+  /*display: none;*/
+/*}*/
+/*#invalid-email{*/
+  /*display: none;*/
+/*}*/
+/*#invalid-password{*/
+  /*display: none;*/
+/*}*/
+/*#success{*/
+  /*display: none;*/
+/*}*/
+/*#failure{*/
+  /*display: none;*/
+/*}*/
