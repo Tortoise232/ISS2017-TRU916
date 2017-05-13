@@ -28,5 +28,3 @@ gradle
 
 #angular
 node_modules
-
-db.properties
