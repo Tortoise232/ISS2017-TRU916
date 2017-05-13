@@ -7,11 +7,11 @@ import {UserService} from "../shared/user.service";
 @Component({
     moduleId: module.id,
     selector: 'register',
-    templateUrl: './user-register.component.html',
-    styleUrls: ['./user-register.component.css'],
+    templateUrl: './register.component.html',
+    styleUrls: ['./register.component.css'],
 })
 
-export class RegisterUserComponent {
+export class RegisterComponent {
   constructor(private userService: UserService,
               private location: Location,
               private router: Router) {
@@ -38,7 +38,7 @@ export class RegisterUserComponent {
     }
   }
 
-  register(name, password, username, email): void {
+  register(name, username, email, password): void {
     console.log("register");
 
     // let required = document.getElementById("required");
@@ -73,7 +73,7 @@ export class RegisterUserComponent {
     // }
 
     let encodedPassword = btoa(password);
-    this.userService.register(name, encodedPassword, username, email)
+    this.userService.register(name, username, email, encodedPassword)
       .subscribe(s => this.showRegistrationStatus(s))
   }
 }

@@ -1,20 +1,23 @@
 import {Component} from "@angular/core";
 import {Router} from "@angular/router";
+import {AuthenticationService} from "../user/shared/authentication.service";
 
 @Component({
   selector: 'home',
+  providers: [AuthenticationService],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent{
-  constructor(private router: Router) {}
+  constructor(private router: Router,
+              private authenticationService: AuthenticationService) {}
 
-  gotoLogin(): void {
-    this.router.navigate(['login']);
+  ngOnInit(){
+    this.authenticationService.checkCredentials();
   }
 
-  gotoRegister(): void {
-    this.router.navigate(['register']);
+  logout() {
+    this.authenticationService.logout();
   }
 
   gotoRegisterConference(): void {
