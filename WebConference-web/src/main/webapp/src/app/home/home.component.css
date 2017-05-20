@@ -1,0 +1,70 @@
+body {
+  background: #e9e9e9;
+  color: #666666;
+  font-family: 'RobotoDraft', 'Roboto', sans-serif;
+  font-size: 14px;
+  height: 950px;
+}
+
+/*Title*/
+.home-title {
+  float: left;
+  margin-top: 30px;
+  margin-left: 220px;
+  padding: 50px 0;
+  text-align: center;
+  letter-spacing: 4px;
+}
+.home-title h1 {
+  margin: 0;
+  font-size: 55px;
+  font-weight: 600;
+}
+
+/* Add conference */
+#add-conference {
+  top: 200px;
+  position: absolute;
+}
+
+#add-conference .button-container {
+  margin: 0 60px;
+}
+#add-conference .button-container button {
+  border-radius: 20px;
+  outline: 0;
+  cursor: pointer;
+  border: 2px solid gray;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+#add-conference .button-container button span {
+  color: dimgray;
+  transition: .3s ease;
+}
+
+/* Logout */
+#logout {
+  top: 300px;
+  position: absolute;
+}
+
+#logout .button-container {
+  margin: 0 60px;
+}
+#logout .button-container button {
+  border-radius: 20px;
+  outline: 0;
+  cursor: pointer;
+  border: 2px solid gray;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+#add-conference .button-container button span {
+  color: dimgray;
+  transition: .3s ease;
+}

@@ -5,18 +5,19 @@ import {HttpModule} from "@angular/http";
 import {AppRoutingModule} from "./app-routing.module";
 
 import {AppComponent} from "./app.component";
-import {RegisterUserComponent} from "./user/user-register/user-register.component";
+import {RegisterComponent} from "./user/register/register.component";
 
 import {UserService} from "./user/shared/user.service";
 import {HomeComponent} from "./home/home.component";
-import {LoginComponent} from "./login/login.component";
+import {LoginComponent} from "./user/login/login.component";
 import {RegisterConferenceComponent} from "./conference/conference-register/conference-register.component";
 import {ConferenceService} from "./conference/shared/conference.service";
+import {AuthenticationService} from "./user/shared/authentication.service";
 
 @NgModule({
   declarations: [
     AppComponent,
-    RegisterUserComponent,
+    RegisterComponent,
     RegisterConferenceComponent,
     HomeComponent,
     LoginComponent
@@ -27,7 +28,7 @@ import {ConferenceService} from "./conference/shared/conference.service";
     HttpModule,
     AppRoutingModule
   ],
-  providers: [UserService,ConferenceService],
+  providers: [UserService,AuthenticationService,ConferenceService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

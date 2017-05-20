@@ -13,7 +13,7 @@ body {
   letter-spacing: 2px;
 }
 .pen-title h1 {
-  margin: 0px;
+  margin: 0;
   font-size: 48px;
   font-weight: 300;
 }
@@ -23,7 +23,6 @@ body {
   position: relative;
   max-width: 460px;
   margin: 0 auto;
-  height: 950px;
 }
 
 /* Card */
@@ -151,20 +150,18 @@ body {
   font-size: inherit;
 }
 
-.center_div{
-  width: 25%;
-}
-#required{
-  display: none;
-}
-#invalid-date{
-  display: none;
-}
-#success{
-  display: none;
-}
-#failure{
-  display: none;
-}
-input::-webkit-datetime-edit{ color: transparent; }
-input:focus::-webkit-datetime-edit{ color: gray;}
+/*#required{*/
+  /*display: none;*/
+/*}*/
+/*#invalid-email{*/
+  /*display: none;*/
+/*}*/
+/*#invalid-password{*/
+  /*display: none;*/
+/*}*/
+/*#success{*/
+  /*display: none;*/
+/*}*/
+/*#failure{*/
+  /*display: none;*/
+/*}*/

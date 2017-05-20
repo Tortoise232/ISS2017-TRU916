@@ -13,6 +13,7 @@ import ro.tru916.core.repository.UserRepository;
 import java.nio.charset.StandardCharsets;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Created by Laura on 4/30/2017.
@@ -43,6 +44,24 @@ public class UserServiceImpl implements UserService {
         }
 
         log.trace("addUser: user={}", user);
+    }
+
+    @Override
+    @Transactional
+    public void authenticateUser(String username, byte[] password) throws RuntimeException {
+        String decodedPassword = new String(password, StandardCharsets.UTF_8);
+        log.trace("authenticateUser: username={}, password={}", username, password);
+
+        Iterable<User> users = this.userRepository.findAll();
+        User foundUser = new User();
+        for (User user: users) {
+            if(user.getUsername().equals(username))
+                foundUser = user;
+        }
+        if(!foundUser.getPassword().equals(decodedPassword))
+            throw new RuntimeException("Failed authentication.");
+
+        log.trace("authenticateUser end");
     }
 
 
