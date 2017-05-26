@@ -46,4 +46,22 @@ public class UserController {
         }
         return response;
     }
+
+    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+    public ResponseEntity authenticateUser(@RequestBody final Map<String, UserDto> userDtoMap){
+        log.trace("authenticateUser: userDtoMap={}", userDtoMap);
+
+        ResponseEntity response;
+        UserDto userDto = userDtoMap.get("user");
+        try {
+            userService.authenticateUser(userDto.getUsername(), userDto.getPassword());
+            response = new ResponseEntity(new EmptyJsonResponse(), HttpStatus.OK);
+            log.trace("authenticateUser: successful");
+        }catch (RuntimeException e){
+            response = new ResponseEntity(new EmptyJsonResponse(), HttpStatus.UNAUTHORIZED);
+            log.trace("authenticateUser: failed");
+        }
+
+        return response;
+    }
 }

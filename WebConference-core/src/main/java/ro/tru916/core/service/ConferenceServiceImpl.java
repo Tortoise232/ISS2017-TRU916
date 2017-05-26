@@ -32,8 +32,12 @@ public class ConferenceServiceImpl implements ConferenceService {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         try {
             Date confDate = format.parse(date);
-            Conference conference = new Conference(name, confDate);
+            Conference conference = new Conference(name, confDate,confDate);//Am pus aici ca deadline-ul sa fie chiar in data de incepere a conferintei
+            //dar trebue setat de user
+            //de asemenea trebe sa
+
             try {
+
                 conferenceRepository.save(conference);
             } catch (ConstraintViolationException e) {
                 throw new RuntimeException("Conference must be unique.");

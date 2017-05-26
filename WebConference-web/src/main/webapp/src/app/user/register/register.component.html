@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Material Login Form</title>
+  <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
+  <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+</head>
+
+<body>
+
+<div class="pen-title">
+  <h1>Conference Registration Form</h1>
+</div>
+<div class="container">
+  <div class="card"></div>
+  <div class="card">
+    <h1 class="title">Register</h1>
+    <form>
+      <div class="input-container">
+        <input type="text" id="name" required="required" #name/>
+        <label for="name">Name</label>
+        <div class="bar"></div>
+      </div>
+      <div class="input-container">
+        <input type="text" id="username" required="required" #username/>
+        <label for="username">Username</label>
+        <div class="bar"></div>
+      </div>
+      <div class="input-container">
+        <input type="email" id="email" required="required" #email/>
+        <label for="email">Email</label>
+        <div class="bar"></div>
+      </div>
+      <div class="input-container">
+        <input type="password" id="password" required="required" #password/>
+        <label for="password">Password</label>
+        <div class="bar"></div>
+      </div>
+      <div class="button-container">
+        <button (click)="register(name.value, username.value, email.value, password.value)"><span>Go</span></button>
+      </div>
+
+      <!--<div id="invalid-email" class="alert alert-danger">-->
+        <!--<strong>Invalid email format.</strong>-->
+      <!--</div>-->
+      <!--<div id="invalid-password" class="alert alert-danger">-->
+        <!--<strong>The password should contain at least 6 characters.</strong>-->
+      <!--</div>-->
+      <!--<div id="success">-->
+        <!--<div class="alert alert-success">-->
+          <!--<strong>Your account was successfully created.</strong>-->
+        <!--</div>-->
+        <!--<br>-->
+        <!--<p>Do you want to <button (click)="gotoLogin()" type="button" class="btn btn-default">Login</button> right now?</p>-->
+      <!--</div>-->
+      <!--<div id="failure" class="alert alert-danger">-->
+        <!--<strong>This username is already taken. Please choose another one.</strong>-->
+      <!--</div>-->
+
+    </form>
+  </div>
+
+  <div class="card alt">
+    <div class="toggle"></div>
+  </div>
+</div>
+
+
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+</body>
+</html>
