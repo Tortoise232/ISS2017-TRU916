@@ -23,12 +23,17 @@
         <div class="bar"></div>
       </div>
       <div class="input-container">
-        <input type="text" id="date"  required="required" #date/>
+        <input type="date" id="date" required="required" #date/>
         <label for="date">Date</label>
         <div class="bar"></div>
       </div>
+      <div class="input-container">
+        <input type="date" id="deadline" required="required" #deadline/>
+        <label for="deadline">Deadline</label>
+        <div class="bar"></div>
+      </div>
       <div class="button-container">
-        <button (click)="register(name.value, date.value)"><span>Go</span></button>
+        <button (click)="register(name.value, date.value, deadline.value)"><span>Go</span></button>
       </div>
     </form>
   </div>
@@ -48,7 +53,7 @@
     </div>
   </div>
   <div id="failure" class="alert alert-danger">
-    <strong>This name is already taken. Please choose another one.</strong>
+    <strong>There is already a conference with the same name and date.</strong>
   </div>
 </div>
 

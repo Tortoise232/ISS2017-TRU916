@@ -27,8 +27,8 @@ export class RegisterConferenceComponent {
   showRegistrationStatus(status: string): void{
     if(status == "Created"){
       let success = document.getElementById("success");
-      let form = document.getElementById("register-form");
-      form.style.display = "none";
+      //let form = document.getElementById("form");
+      //form.style.display = "none";
       success.style.display = "block";
     }
     if(status == "IM Used"){
@@ -37,7 +37,7 @@ export class RegisterConferenceComponent {
     }
   }
 
-  register(name, date): void {
+  register(name, date, deadline): void {
     console.log("register");
 
     let required = document.getElementById("required");
@@ -49,20 +49,21 @@ export class RegisterConferenceComponent {
     success.style.display = "none";
     failure.style.display = "none";
 
-    if (!name || !date) {
+    if (!name || !date || !deadline) {
       console.log("All fields are required!");
       required.style.display = "block";
       return;
     }
 
+    /*
     let datePattern = /^[0-3]?[0-9]\/[01]?[0-9]\/[12][90][0-9][0-9]$/;
     if(!datePattern.test(date)) {
       console.log("Invalid date format used!");
       invalidDate.style.display = "block";
       return;
     }
-
-    this.conferenceService.register(name, date)
+  */
+    this.conferenceService.register(name, date, deadline)
       .subscribe(s => this.showRegistrationStatus(s))
   }
 }

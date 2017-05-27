@@ -11,16 +11,18 @@ import java.util.Set;
  * Created by cata on 27.04.2017.
  */
 @Entity
-@Table(name = "Conference")
+@Table(name = "Conference", uniqueConstraints={
+        @UniqueConstraint(columnNames = {"name", "date"})
+})
 public class Conference extends BaseEntity<Long> {
 
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "date", nullable = false, unique = true)
+    @Column(name = "date", nullable = false)
     private Date date;
 
-    @Column(name = "deadline",nullable=false)
+    @Column(name = "deadline", nullable=false)
     private Date deadline;
 
 
@@ -52,10 +54,11 @@ public class Conference extends BaseEntity<Long> {
     public Conference() {
     }
 
-    public Conference(String name, Date date,Date deadline) {
+    public Conference(String name, Date date,Date deadline, User owner) {
         this.name = name;
         this.date = date;
-        this.deadline=deadline;
+        this.deadline = deadline;
+        this.owner = owner;
     }
 
     public String getName() {
