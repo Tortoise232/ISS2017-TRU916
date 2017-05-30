@@ -14,10 +14,10 @@ import java.util.Set;
 @Table(name = "Conference")
 public class Conference extends BaseEntity<Long> {
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false,unique = true)
     private String name;
 
-    @Column(name = "date", nullable = false, unique = true)
+    @Column(name = "date", nullable = false)
     private Date date;
 
     @Column(name = "deadline",nullable=false)
