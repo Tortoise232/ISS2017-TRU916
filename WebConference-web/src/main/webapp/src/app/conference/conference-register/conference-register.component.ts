@@ -9,7 +9,7 @@ import {ConferenceService} from "../shared/conference.service";
 
 @Component({
   moduleId: module.id,
-  selector: 'register',
+  selector: 'registerconf',
   templateUrl: './conference-register.component.html',
   styleUrls: ['./conference-register.component.css'],
 })

@@ -8,11 +8,12 @@ import {AuthenticationService} from "../user/shared/authentication.service";
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent{
+export class HomeComponent {
   constructor(private router: Router,
-              private authenticationService: AuthenticationService) {}
+              private authenticationService: AuthenticationService) {
+  }
 
-  ngOnInit(){
+  ngOnInit() {
     this.authenticationService.checkCredentials();
   }
 
@@ -21,6 +22,8 @@ export class HomeComponent{
   }
 
   gotoRegisterConference(): void {
-    this.router.navigate(['registerconf']);
+    // this.router.navigate(['registerconf']);
+   let varr = document.getElementById("registerconf");
+   varr.style.display="block";
   }
 }
