@@ -23,7 +23,7 @@ public class Paper extends BaseEntity<Long> {
     @Column(name = "eventid", nullable = false)
     private Long eventid;
 
-    @ManyToMany(mappedBy = "papers")
+    @ManyToMany(mappedBy = "papers",fetch = FetchType.EAGER)
     private Set<User> owners=new HashSet<User>();
 
     @ManyToOne

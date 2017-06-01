@@ -29,20 +29,20 @@ public class Conference extends BaseEntity<Long> {
     private Set<Paper> papers = new HashSet<>();
 
 
-    @ManyToMany(mappedBy = "reviewer")
+    @ManyToMany(mappedBy = "reviewer",fetch = FetchType.EAGER)
     private Set<User> reviewers = new HashSet<>();
 
 
-    @ManyToMany(mappedBy = "speaker")
+    @ManyToMany(mappedBy = "speaker",fetch = FetchType.EAGER)
     private Set<User> speakers = new HashSet<>();
 
-    @OneToMany(mappedBy = "accepted")
+    @OneToMany(mappedBy = "accepted",fetch = FetchType.EAGER)
     private Set<Paper> acceptedpapers = new HashSet<>();
 
-    @ManyToMany(mappedBy = "attendance")
+    @ManyToMany(mappedBy = "attendance",fetch = FetchType.EAGER)
     private Set<User> attendanceUsers;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinTable(name = "CONFERENCE_OWNER")
     private User owner;
 
@@ -52,10 +52,11 @@ public class Conference extends BaseEntity<Long> {
     public Conference() {
     }
 
-    public Conference(String name, Date date,Date deadline) {
+    public Conference(String name, Date date,Date deadline,User owner) {
         this.name = name;
         this.date = date;
         this.deadline=deadline;
+        this.owner=owner;
     }
 
     public String getName() {

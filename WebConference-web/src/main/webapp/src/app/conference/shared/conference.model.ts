@@ -4,4 +4,6 @@
 export class Conference {
   name: string;
   date: string;
+  deadline: string;
+  ownerUsername: string;
 }
