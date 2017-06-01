@@ -1,6 +1,5 @@
 package ro.tru916.core.service;
 
-import org.apache.commons.codec.binary.Base64;
 import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +12,7 @@ import ro.tru916.core.repository.UserRepository;
 import java.nio.charset.StandardCharsets;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Objects;
+import java.util.List;
 
 /**
  * Created by Laura on 4/30/2017.
@@ -65,5 +64,18 @@ public class UserServiceImpl implements UserService {
         log.trace("authenticateUser end");
     }
 
+    @Override
+    @Transactional
+    public User getUserByName(String username) {
+        log.trace("THE NAME OF THE USER IS {}",username);
+        List<User> userl = this.userRepository.findAll();
+        for (User userr : userl)
+        {
+
+            if(userr.getUsername().equals(username))
+                return userr;
+        }
+        return new User();
+    }
 
 }
