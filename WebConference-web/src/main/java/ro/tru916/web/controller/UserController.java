@@ -61,6 +61,7 @@ public class UserController {
             response = new ResponseEntity(new EmptyJsonResponse(), HttpStatus.UNAUTHORIZED);
             log.trace("authenticateUser: failed");
         }
+
         return response;
     }
 }

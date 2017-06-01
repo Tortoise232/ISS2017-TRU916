@@ -1,9 +1,8 @@
 package ro.tru916.core.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import lombok.*;
+
+import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,35 +14,49 @@ import java.util.Set;
 @Table(name = "Conference")
 public class Conference extends BaseEntity<Long> {
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false,unique = true)
     private String name;
 
-    @Column(name = "date", nullable = false, unique = true)
+    @Column(name = "date", nullable = false)
     private Date date;
+
+    @Column(name = "deadline",nullable=false)
+    private Date deadline;
+
 
 
     @OneToMany(mappedBy = "paper")
     private Set<Paper> papers = new HashSet<>();
 
 
-    @OneToMany(mappedBy = "reviewer")
+    @ManyToMany(mappedBy = "reviewer")
     private Set<User> reviewers = new HashSet<>();
 
 
-    @OneToMany(mappedBy = "speaker")
+    @ManyToMany(mappedBy = "speaker")
     private Set<User> speakers = new HashSet<>();
 
     @OneToMany(mappedBy = "accepted")
     private Set<Paper> acceptedpapers = new HashSet<>();
 
+    @ManyToMany(mappedBy = "attendance")
+    private Set<User> attendanceUsers;
+
+    @ManyToOne
+    @JoinTable(name = "CONFERENCE_OWNER")
+    private User owner;
+
+
+
+
     public Conference() {
     }
 
-    public Conference(String name, Date date) {
+    public Conference(String name, Date date,Date deadline) {
         this.name = name;
         this.date = date;
+        this.deadline=deadline;
     }
-
 
     public String getName() {
         return name;
@@ -59,6 +72,14 @@ public class Conference extends BaseEntity<Long> {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Date getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(Date deadline) {
+        this.deadline = deadline;
     }
 
     public Set<Paper> getPapers() {
@@ -93,6 +114,22 @@ public class Conference extends BaseEntity<Long> {
         this.acceptedpapers = acceptedpapers;
     }
 
+    public Set<User> getAttendanceUsers() {
+        return attendanceUsers;
+    }
+
+    public void setAttendanceUsers(Set<User> attendanceUsers) {
+        this.attendanceUsers = attendanceUsers;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -102,20 +139,28 @@ public class Conference extends BaseEntity<Long> {
 
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (date != null ? !date.equals(that.date) : that.date != null) return false;
+        if (deadline != null ? !deadline.equals(that.deadline) : that.deadline != null) return false;
         if (papers != null ? !papers.equals(that.papers) : that.papers != null) return false;
         if (reviewers != null ? !reviewers.equals(that.reviewers) : that.reviewers != null) return false;
         if (speakers != null ? !speakers.equals(that.speakers) : that.speakers != null) return false;
-        return acceptedpapers != null ? acceptedpapers.equals(that.acceptedpapers) : that.acceptedpapers == null;
+        if (acceptedpapers != null ? !acceptedpapers.equals(that.acceptedpapers) : that.acceptedpapers != null)
+            return false;
+        if (attendanceUsers != null ? !attendanceUsers.equals(that.attendanceUsers) : that.attendanceUsers != null)
+            return false;
+        return owner != null ? owner.equals(that.owner) : that.owner == null;
     }
 
     @Override
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
         result = 31 * result + (date != null ? date.hashCode() : 0);
+        result = 31 * result + (deadline != null ? deadline.hashCode() : 0);
         result = 31 * result + (papers != null ? papers.hashCode() : 0);
         result = 31 * result + (reviewers != null ? reviewers.hashCode() : 0);
         result = 31 * result + (speakers != null ? speakers.hashCode() : 0);
         result = 31 * result + (acceptedpapers != null ? acceptedpapers.hashCode() : 0);
+        result = 31 * result + (attendanceUsers != null ? attendanceUsers.hashCode() : 0);
+        result = 31 * result + (owner != null ? owner.hashCode() : 0);
         return result;
     }
 
@@ -124,10 +169,13 @@ public class Conference extends BaseEntity<Long> {
         return "Conference{" +
                 "name='" + name + '\'' +
                 ", date=" + date +
+                ", deadline=" + deadline +
                 ", papers=" + papers +
                 ", reviewers=" + reviewers +
                 ", speakers=" + speakers +
                 ", acceptedpapers=" + acceptedpapers +
+                ", attendanceUsers=" + attendanceUsers +
+                ", owner=" + owner +
                 '}';
     }
 }
