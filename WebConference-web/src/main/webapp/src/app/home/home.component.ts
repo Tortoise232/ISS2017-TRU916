@@ -24,10 +24,9 @@ export class HomeComponent {
     this.authenticationService.logout();
   }
 
-  gotoRegisterConference(): void {
-    this.router.navigate(['registerconf']);
-   // let varr = document.getElementById("registerconf");
-   // varr.style.display="block";
+  loadPage(data:string) {
+    let activePage = document.getElementById(this.acti);
+    console.log(activePage);
   }
 
   goTo(next:string,activv:string)

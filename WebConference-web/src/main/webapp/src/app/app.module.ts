@@ -13,6 +13,7 @@ import {LoginComponent} from "./user/login/login.component";
 import {RegisterConferenceComponent} from "./conference/conference-register/conference-register.component";
 import {ConferenceService} from "./conference/shared/conference.service";
 import {AuthenticationService} from "./user/shared/authentication.service";
+import {ProfileComponent} from "./user/profile/profile.component";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {AuthenticationService} from "./user/shared/authentication.service";
     RegisterComponent,
     RegisterConferenceComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
