@@ -17,13 +17,13 @@ export class AuthenticationService {
     this.router.navigate(['login']);
   }
 
-  showLoginStatus(status: string, username: string): void{
+  showLoginStatus(status: number, username: string): void{
     console.log(status);
-    if (status == "OK"){
+    if (status == 200){
       localStorage.setItem("user", username);
       this.router.navigate(['home']);
     }
-    if (status == "Unauthorized") {
+    if (status == 401) {
     }
   }
 

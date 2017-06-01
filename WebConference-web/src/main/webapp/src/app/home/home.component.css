@@ -1,9 +1,8 @@
 body {
-  background: #e9e9e9;
+  /*background: #e9e9e9;*/
   color: #666666;
   font-family: 'RobotoDraft', 'Roboto', sans-serif;
   font-size: 14px;
-
 }
 
 /*Title*/
@@ -100,7 +99,7 @@ body {
 }
 
 .off-canvas > .cstm-shade > .cstm-navi {
-  background: white;
+  background: #e9e9e9;
   width: 300px;
   height: 100%;
   position: fixed;

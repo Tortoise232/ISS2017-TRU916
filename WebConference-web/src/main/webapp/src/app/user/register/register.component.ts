@@ -25,18 +25,22 @@ export class RegisterComponent {
     this.router.navigate(['login']);
   }
 
-  showRegistrationStatus(status: string): void{
-    if(status == "CREATED"){
-      // let success = document.getElementById("success");
+  showRegistrationStatus(status: number): void{
+    if(status == 201){
+      let success = document.getElementById("success");
       // let form = document.getElementById("container");
       // form.style.display = "none";
-      // success.style.display = "block";
-      // this.router.navigate(["/login"]);
+      success.style.display = "block";
+      setTimeout(() => {
+          this.router.navigate(['/login']);
+        },
+        2000);
       console.log("I'm CREATED");
+      return;
     }
-    if(status == "IM Used"){
-      // let failure = document.getElementById("failure");
-      // failure.style.display = "block";
+    if(status == 226){
+      let failure = document.getElementById("failure");
+      failure.style.display = "block";
       console.log("I'm Used");
     }
   }
@@ -49,15 +53,17 @@ export class RegisterComponent {
     let invalidPassword = document.getElementById("invalid-password");
     let success = document.getElementById("success");
     let failure = document.getElementById("failure");
-      // console.log("Am trecut de iinitializare");
-    // required.style.display = "none";
+    let failureAll = document.getElementById("failureAll");
+
     invalidEmail.style.display = "none";
     invalidPassword.style.display = "none";
     success.style.display = "none";
     failure.style.display = "none";
+    failureAll.style.display = "none";
+
     if (!name || !password || !username || !email) {
+      failureAll.style.display = "block";
       console.log("All fields are required!");
-      // required.style.display = "block";
       return;
     }
 
@@ -78,5 +84,11 @@ export class RegisterComponent {
     let encodedPassword = btoa(password);
     this.userService.register(name, username, email, encodedPassword)
       .subscribe(s => this.showRegistrationStatus(s))
+  }
+
+  eventHandler(keyCode, name, username, email, password) {
+    if (keyCode == 13) {
+      this.register(name, username, email, password);
+    }
   }
 }

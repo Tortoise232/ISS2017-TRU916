@@ -16,7 +16,7 @@
   <div class="card"></div>
   <div class="card">
     <h1 class="title">Login</h1>
-    <form>
+    <form (keypress)="eventHandler($event.keyCode,username.value,password.value)">
       <div class="input-container">
         <input type="text" id="username" required="required" #username/>
         <label for="username">Username</label>
@@ -27,8 +27,16 @@
         <label for="password">Password</label>
         <div class="bar"></div>
       </div>
+
+      <div id="failure" class="alert alert-danger" align="center">
+        <strong>Please complete username & password</strong>
+      </div>
+      <div id="failureUserPass" class="alert alert-danger" align="center">
+        <strong>Wrong username or password</strong>
+      </div>
+
       <div class="button-container">
-        <button type="button" (click)="login(username.value, password.value)"><span>Go</span></button>
+        <button type="button" (click)="login(username.value, password.value)" ><span>Go</span></button>
       </div>
       <div (click)="gotoRegister()" class="footer"><a>Don't have an account? Register now</a></div>
     </form>

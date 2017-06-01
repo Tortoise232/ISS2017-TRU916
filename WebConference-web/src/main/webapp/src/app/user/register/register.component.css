@@ -3,7 +3,7 @@ body {
   color: #666666;
   font-family: 'RobotoDraft', 'Roboto', sans-serif;
   font-size: 14px;
-  /*height: 950px;*/
+  height: 1000px;
 }
 
 /* Pen Title */
@@ -150,18 +150,6 @@ body {
   font-size: inherit;
 }
 
-#required{
-  display: none;
-}
-#invalid-email{
-  display: none;
-}
-#invalid-password{
-  display: none;
-}
-#success{
-  display: none;
-}
-#failure{
+#required, #invalid-email, #invalid-password, #success, #failure, #failureAll{
   display: none;
 }

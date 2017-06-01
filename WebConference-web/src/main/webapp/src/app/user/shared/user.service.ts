@@ -19,19 +19,19 @@ export class UserService {
   }
 
   private extractStatus(res: Response){
-    let status = res.statusText;
+    let status = res.status;
     console.log(status);
     return status;
   }
 
-  register(name: string, username: string, email:string, password: string): Observable<string> {
+  register(name: string, username: string, email:string, password: string): Observable<number> {
     let user = {name, password, username, email};
     return this.http
       .post(this.registerUrl, JSON.stringify({"user": user}), {headers: this.headers})
       .map(this.extractStatus);
   }
 
-  authenticate(username: string, password: string): Observable<string>{
+  authenticate(username: string, password: string): Observable<number>{
     let name = "";
     let email = "";
     let user = {name, password, username, email};
