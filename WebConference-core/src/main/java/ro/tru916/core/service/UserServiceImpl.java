@@ -41,6 +41,7 @@ public class UserServiceImpl implements UserService {
             userRepository.save(user);
         }catch(ConstraintViolationException e){
             throw new RuntimeException("Username must be unique.");
+
         }
 
         log.trace("addUser: user={}", user);

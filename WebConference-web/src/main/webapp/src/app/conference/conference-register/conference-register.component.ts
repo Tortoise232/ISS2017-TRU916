@@ -6,6 +6,7 @@ import {Location} from '@angular/common';
 import {Router} from "@angular/router";
 
 import {ConferenceService} from "../shared/conference.service";
+import {delay} from "rxjs/operator/delay";
 
 @Component({
   moduleId: module.id,
@@ -24,14 +25,20 @@ export class RegisterConferenceComponent {
     this.location.back();
   }
 
-  showRegistrationStatus(status: string): void{
-    if(status == "Created"){
+  showRegistrationStatus(status: number): void{
+    if(status == 201) {
       let success = document.getElementById("success");
-      let form = document.getElementById("register-form");
-      form.style.display = "none";
+      // let form = document.getElementById("register-form");
+      // form.style.display = "none";
       success.style.display = "block";
+      setTimeout(() => {
+          this.router.navigate(['/register']);
+        },
+        2000);
+
+
     }
-    if(status == "IM Used"){
+    if(status == 226){
       let failure = document.getElementById("failure");
       failure.style.display = "block";
     }
@@ -63,6 +70,7 @@ export class RegisterConferenceComponent {
     }
 
     this.conferenceService.register(name, date)
-      .subscribe(s => this.showRegistrationStatus(s))
+      .subscribe(s => this.showRegistrationStatus(s));
+
   }
 }

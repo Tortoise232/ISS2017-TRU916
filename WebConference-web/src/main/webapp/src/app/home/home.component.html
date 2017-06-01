@@ -12,6 +12,7 @@
 
 <body>
 
+
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <a class="navbar-brand" href="/home">Conference Management</a>
@@ -30,20 +31,20 @@
     <div class="cstm-navi">
       <div class="cstm-navi-content">
         <ul class="nav nav-pills nav-stacked">
-          <li role="presentation" class="active">
+          <li role="presentation" class="active" id="bhome">
             <a href="/home">
               <span class="glyphicon glyphicon-home"></span>
               Home
             </a>
           </li>
-          <li role="presentation" (click)="gotoRegisterConference()">
-            <a>
+          <li role="presentation"  id="bconference">
+            <a (click)="goTo('registerconf','bconference')">
               <span class="glyphicon glyphicon-plus"></span>
               Add Conference
             </a>
           </li>
           <li role="presentation">
-            <a href="#">
+            <a (click)="goTo('register')">
               <span class="glyphicon glyphicon-user"></span>
               Profile
             </a>
@@ -58,12 +59,16 @@
       </div>
     </div>
   </div>
+
 </div>
 
-  <!--<register></register>-->
 <div id="registerconf">
   <registerconf></registerconf>
 </div>
+<div id="register">
+  <register></register>
+</div>
+  <!--<register></register>-->
 
 
   <!--<div class="off-canvas">-->

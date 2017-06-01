@@ -4,11 +4,16 @@ import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ro.tru916.core.model.Conference;
 import ro.tru916.core.repository.ConferenceRepository;
 
+import javax.persistence.RollbackException;
+import java.sql.SQLDataException;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,6 +33,7 @@ public class ConferenceServiceImpl implements ConferenceService {
     @Override
     @Transactional
     public void addConference(String name, String date) throws RuntimeException {
+        log.trace("ADD CINFERENCE");
         log.trace("addConference: name={}, date={}", name, date);
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         try {
@@ -37,9 +43,14 @@ public class ConferenceServiceImpl implements ConferenceService {
             //de asemenea trebe sa
 
             try {
-
-                conferenceRepository.save(conference);
-            } catch (ConstraintViolationException e) {
+                conferenceRepository.saveAndFlush(conference);
+            }
+//             catch ( ConstraintViolationException e) {
+//                log.trace("CONFERENCE ERROR SAVE");
+//
+//            }
+            catch(Exception e)
+            {
                 throw new RuntimeException("Conference must be unique.");
             }
             log.trace("addConference: conference={}", conference);

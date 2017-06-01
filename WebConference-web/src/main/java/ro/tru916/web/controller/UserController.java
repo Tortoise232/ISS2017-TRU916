@@ -43,6 +43,7 @@ public class UserController {
         }catch (RuntimeException e){
             response = new ResponseEntity(new EmptyJsonResponse(), HttpStatus.IM_USED);
             log.trace("registerUser: failed");
+
         }
         return response;
     }

@@ -41,6 +41,7 @@ public class ConferenceController {
             log.trace("registerConference: successful");
         }catch (RuntimeException e){
             response = new ResponseEntity(new EmptyJsonResponse(), HttpStatus.IM_USED);
+            System.out.println(response.toString());
             log.trace("registerConference: failed");
         }
         return response;
