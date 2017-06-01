@@ -9,7 +9,9 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ro.tru916.core.model.Conference;
+import ro.tru916.core.model.User;
 import ro.tru916.core.repository.ConferenceRepository;
+import ro.tru916.core.repository.UserRepository;
 
 import javax.persistence.RollbackException;
 import java.sql.SQLDataException;
@@ -17,6 +19,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -30,15 +33,23 @@ public class ConferenceServiceImpl implements ConferenceService {
     @Autowired
     private ConferenceRepository conferenceRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
+
     @Override
     @Transactional
-    public void addConference(String name, String date) throws RuntimeException {
+    public void addConference(String name, String date,String deadline,String ownerUsername) throws RuntimeException {
         log.trace("ADD CINFERENCE");
-        log.trace("addConference: name={}, date={}", name, date);
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        log.trace("\n\n\naddConference:owner={} \n\n\n"+ownerUsername);
+
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
         try {
             Date confDate = format.parse(date);
-            Conference conference = new Conference(name, confDate,confDate);//Am pus aici ca deadline-ul sa fie chiar in data de incepere a conferintei
+            Date confDeadline = format.parse(deadline);
+            User confOwner = findUser(ownerUsername);
+            Conference conference = new Conference(name, confDate,confDeadline,confOwner);//Am pus aici ca deadline-ul sa fie chiar in data de incepere a conferintei
             //dar trebue setat de user
             //de asemenea trebe sa
 
@@ -59,5 +70,23 @@ public class ConferenceServiceImpl implements ConferenceService {
             throw new RuntimeException("Date format invalid.");
         }
     }
+    private User findUser(String username){
+        Iterable<User> users = this.userRepository.findAll();
+        for (User user: users) {
+            if(user.getUsername().equals(username))
+                return user;
+        }
+        throw new RuntimeException("User not found");
+    }
+
+    @Override
+    @Transactional
+    public List<Conference> findAll(){
+        log.trace("findAllConferences");
+        List<Conference> conferences = conferenceRepository.findAll();
+        log.trace("findAll: conferences={}",conferences);
+        return conferences;
+    }
+
 
 }

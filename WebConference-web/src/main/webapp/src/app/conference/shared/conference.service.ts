@@ -42,8 +42,9 @@ export class ConferenceService {
   }
 
 
-  register(name: string, date: string): Observable<number> {
-    let conference = {name, date};
+  register(name: string, date: string, deadline: string): Observable<number> {
+    var ownerUsername = localStorage.getItem("user");
+    let conference = {name, date, deadline, ownerUsername};
     return this.http
       .post(this.conferenceUrl, JSON.stringify({"conference": conference}), {headers: this.headers})
       .map(this.extractStatus)
