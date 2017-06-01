@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 
 import {UserService} from "../shared/user.service";
 import {User} from "../shared/user.model";
+import {AuthenticationService} from "../shared/authentication.service";
 
 @Component({
     moduleId: module.id,
@@ -17,12 +18,14 @@ export class ProfileComponent implements OnInit{
   private user:User;
 
   ngOnInit(): void {
+    this.authenticationService.checkCredentials();
     this.getUser();
   }
 
   constructor(private userService: UserService,
               private location: Location,
-              private router: Router) {}
+              private router: Router,
+              private authenticationService: AuthenticationService) {}
 
   goBack(): void {
     this.location.back();
@@ -35,6 +38,5 @@ export class ProfileComponent implements OnInit{
   getUser() {
     let username=localStorage.getItem("user");
     this.userService.getUsersByName(username).subscribe((userr)=>{this.user=userr});
-    // console.log(this.username);
   }
 }

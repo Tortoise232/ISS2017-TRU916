@@ -145,7 +145,7 @@ body {
 }
 
 .card.alt .toggle:before {
-  content: '\f040';
+  content: '\f1a1';
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
 }
@@ -153,17 +153,8 @@ body {
 .center_div{
   width: 25%;
 }
-#required{
+#required, #invalid-date, #success, #failure{
   display: none;
 }
-#invalid-date{
-  display: none;
-}
-#success{
-  display: none;
-}
-#failure{
-  display: none;
-}
-input::-webkit-datetime-edit{ color: transparent; }
-input:focus::-webkit-datetime-edit{ color: gray;}
+/*input::-webkit-datetime-edit{ color: transparent; }*/
+/*input:focus::-webkit-datetime-edit{ color: gray;}*/

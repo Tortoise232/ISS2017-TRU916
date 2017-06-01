@@ -125,11 +125,6 @@ body {
 /*color: #ed2553;*/
 /*}*/
 
-#registerconf
-{
-  display: none;
-}
-#register
-{
+#registerconf, #register, #profile {
   display: none;
 }
