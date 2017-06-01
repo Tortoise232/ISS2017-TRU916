@@ -36,9 +36,10 @@ export class LoginComponent{
     if (username == "" || password == "") {
       failure.style.display = "block";
     }
-    else if(localStorage.length < 1) {
+    else if(localStorage.getItem("user") == null) {
       failureUserPass.style.display = "block";
     }
+
   }
 
   eventHandler(keyCode,username,password) {
