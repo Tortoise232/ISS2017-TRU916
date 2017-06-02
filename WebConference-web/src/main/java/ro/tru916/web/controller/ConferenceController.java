@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ro.tru916.core.model.Conference;
 import ro.tru916.core.service.ConferenceService;
 import ro.tru916.web.converter.ConferenceConverter;
@@ -57,4 +54,12 @@ public class ConferenceController {
 //        log.trace("getConferences: conferences={}", conferences);
 //        return new ConferencesDto(conferences);
 //    }
+
+    @RequestMapping(value = "/conferences/{name}", method = RequestMethod.GET)
+    public ConferenceDto getConference(@PathVariable final String name) {
+        log.trace("getConference: name={}", name);
+        Conference conference = conferenceService.findOne(name);
+        log.trace("getConference: conference={}", conference);
+        return conferenceConverter.convertModelToDto(conference);
+    }
 }

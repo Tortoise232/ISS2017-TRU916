@@ -88,5 +88,18 @@ public class ConferenceServiceImpl implements ConferenceService {
         return conferences;
     }
 
-
+    @Override
+    public Conference findOne(String name) {
+        log.trace("findConference: name={}", name);
+        List<Conference> conferences = conferenceRepository.findAll();
+        Conference conference = new Conference();
+        for (Conference c : conferences) {
+            if(c.getName().equals(name)){
+                conference = c;
+                break;
+            }
+        }
+        log.trace("findConference: conference={}", conference);
+        return conference;
+    }
 }

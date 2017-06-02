@@ -14,6 +14,7 @@ import {RegisterConferenceComponent} from "./conference/conference-register/conf
 import {ConferenceService} from "./conference/shared/conference.service";
 import {AuthenticationService} from "./user/shared/authentication.service";
 import {ProfileComponent} from "./user/profile/profile.component";
+import {ConferenceDetailsComponent} from "./conference/conference-details/conference-details";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {ProfileComponent} from "./user/profile/profile.component";
     RegisterConferenceComponent,
     HomeComponent,
     LoginComponent,
-    ProfileComponent
+    ProfileComponent,
+    ConferenceDetailsComponent
   ],
   imports: [
     BrowserModule,

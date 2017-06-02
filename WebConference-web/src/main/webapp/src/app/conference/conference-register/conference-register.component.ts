@@ -70,7 +70,7 @@ export class RegisterConferenceComponent {
       return;
     }
 
-    if (date.valueOf() < deadline.valueOf()) {
+    if (date.valueOf() >= deadline.valueOf()) {
       deadLineWrong.style.display = "block";
       return;
     }

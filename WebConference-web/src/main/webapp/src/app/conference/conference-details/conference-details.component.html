@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <home></home>
+  <div *ngIf="conference">
+    <div class="pen-title">
+      <h1>Conference {{conference.name}} details</h1>
+    </div>
+    <div class="container">
+      <div>
+        <label>Name: {{conference.name}}</label>
+      </div>
+      <div>
+        <label>Creation Date: {{conference.date}} </label>
+      </div>
+      <div>
+        <label>Deadline: {{conference.deadline}}</label>
+      </div>
+      <div>
+        <label>Owner: {{conference.ownerUsername}}</label>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
