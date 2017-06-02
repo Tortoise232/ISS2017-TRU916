@@ -8,7 +8,7 @@
 </head>
 
 <body>
-
+<home></home>
 <div class="pen-title">
   <h1>Create a Conference</h1>
 </div>
@@ -23,32 +23,40 @@
         <div class="bar"></div>
       </div>
       <div class="input-container">
-        <input type="text" id="date"  required="required" #date/>
+        <input type="date" id="date"  required="required" #date/>
         <label for="date">Date</label>
         <div class="bar"></div>
       </div>
+      <div class="input-container">
+        <input type="date" id="deadline" required="required" #deadline/>
+        <label for="deadline">Deadline</label>
+        <div class="bar"></div>
+      </div>
+      <div id="deadLineWrong" class="alert alert-danger" align="center">
+        <strong>Invalid Deadline!</strong>
+      </div>
+      <div id="required" class="alert alert-danger" align="center">
+        <strong>All fields are required.</strong>
+      </div>
+      <div id="invalid-date" class="alert alert-danger" align="center">
+        <strong>Invalid date format.</strong>
+      </div>
+      <div id="success">
+        <div class="alert alert-success" align="center">
+          <strong>Your conference was successfully created.</strong>
+        </div>
+      </div>
+      <div id="failure" class="alert alert-danger" align="center">
+        <strong>This name is already taken. Please choose another one.</strong>
+      </div>
       <div class="button-container">
-        <button (click)="register(name.value, date.value)"><span>Go</span></button>
+        <button (click)="register(name.value, date.value,deadline.value)"><span>Go</span></button>
       </div>
     </form>
   </div>
 
   <div class="card alt">
     <div class="toggle"></div>
-  </div>
-  <div id="required" class="alert alert-danger">
-    <strong>All fields are required.</strong>
-  </div>
-  <div id="invalid-date" class="alert alert-danger">
-    <strong>Invalid date format.</strong>
-  </div>
-  <div id="success">
-    <div class="alert alert-success">
-      <strong>Your conference was successfully created.</strong>
-    </div>
-  </div>
-  <div id="failure" class="alert alert-danger">
-    <strong>This name is already taken. Please choose another one.</strong>
   </div>
 </div>
 

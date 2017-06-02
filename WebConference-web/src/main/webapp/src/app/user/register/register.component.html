@@ -16,7 +16,7 @@
   <div class="card"></div>
   <div class="card">
     <h1 class="title">Register</h1>
-    <form>
+    <form (keypress)="eventHandler($event.keyCode, name.value, username.value, email.value, password.value)">
       <div class="input-container">
         <input type="text" id="name" required="required" #name/>
         <label for="name">Name</label>
@@ -28,7 +28,7 @@
         <div class="bar"></div>
       </div>
       <div class="input-container">
-        <input type="email" id="email" required="required" #email/>
+        <input type="text" id="email" required="required" #email/>
         <label for="email">Email</label>
         <div class="bar"></div>
       </div>
@@ -37,26 +37,28 @@
         <label for="password">Password</label>
         <div class="bar"></div>
       </div>
+
+      <div id="failureAll" class="alert alert-danger" align="center">
+        <strong>All fields are required</strong>
+      </div>
+      <div id="invalid-email" class="alert alert-danger" align="center">
+        <strong>Invalid email format.</strong>
+      </div>
+      <div id="invalid-password" class="alert alert-danger" align="center">
+        <strong>The password should contain at least 6 characters.</strong>
+      </div>
+      <div id="failure" class="alert alert-danger" align="center">
+        <strong>This username is already taken. Please choose another one.</strong>
+      </div>
+      <div id="success">
+        <div class="alert alert-success" align="center">
+          <strong>Your account was successfully created.</strong>
+        </div>
+      </div>
+
       <div class="button-container">
         <button (click)="register(name.value, username.value, email.value, password.value)"><span>Go</span></button>
       </div>
-
-      <!--<div id="invalid-email" class="alert alert-danger">-->
-        <!--<strong>Invalid email format.</strong>-->
-      <!--</div>-->
-      <!--<div id="invalid-password" class="alert alert-danger">-->
-        <!--<strong>The password should contain at least 6 characters.</strong>-->
-      <!--</div>-->
-      <!--<div id="success">-->
-        <!--<div class="alert alert-success">-->
-          <!--<strong>Your account was successfully created.</strong>-->
-        <!--</div>-->
-        <!--<br>-->
-        <!--<p>Do you want to <button (click)="gotoLogin()" type="button" class="btn btn-default">Login</button> right now?</p>-->
-      <!--</div>-->
-      <!--<div id="failure" class="alert alert-danger">-->
-        <!--<strong>This username is already taken. Please choose another one.</strong>-->
-      <!--</div>-->
 
     </form>
   </div>

@@ -4,6 +4,7 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {UserService} from "./user.service";
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class AuthenticationService {
@@ -17,13 +18,13 @@ export class AuthenticationService {
     this.router.navigate(['login']);
   }
 
-  showLoginStatus(status: string, username: string): void{
+  showLoginStatus(status: number, username: string): void{
     console.log(status);
-    if (status == "OK"){
+    if (status == 200){
       localStorage.setItem("user", username);
       this.router.navigate(['home']);
     }
-    if (status == "Unauthorized") {
+    if (status == 401) {
     }
   }
 

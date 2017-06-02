@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import ro.tru916.core.model.User;
 import ro.tru916.core.service.UserService;
 import ro.tru916.web.converter.UserConverter;
 import ro.tru916.web.dto.EmptyJsonResponse;
@@ -43,6 +44,7 @@ public class UserController {
         }catch (RuntimeException e){
             response = new ResponseEntity(new EmptyJsonResponse(), HttpStatus.IM_USED);
             log.trace("registerUser: failed");
+
         }
         return response;
     }
@@ -62,6 +64,31 @@ public class UserController {
             log.trace("authenticateUser: failed");
         }
 
+        return response;
+    }
+
+    @RequestMapping(value = "/profile", method = RequestMethod.POST)
+    public Map<String, UserDto> getUserByName(@RequestBody final Map<String, UserDto> userDtoMap) {
+
+        log.trace("profileUser: userDtoMap={}", userDtoMap);
+
+        System.out.println(userDtoMap.toString());
+
+        UserDto userDto = userDtoMap.get("user");
+
+        User user = userService.getUserByName(userDto.getUsername());
+
+        System.out.println("am trecut de user");
+//        userDto.setName(user.getName());
+//        userDto.setEmail(user.getEmail());
+//        userDto.setPassword(user.getPassword());
+
+        Map<String, UserDto> response = new HashMap<>();
+
+        response.put("user", userConverter.convertModelToDto(user));
+
+//        System.out.println(userDto.toString());
+        System.out.println(response);
         return response;
     }
 }

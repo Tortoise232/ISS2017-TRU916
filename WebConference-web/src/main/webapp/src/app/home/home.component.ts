@@ -8,11 +8,15 @@ import {AuthenticationService} from "../user/shared/authentication.service";
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent{
-  constructor(private router: Router,
-              private authenticationService: AuthenticationService) {}
+export class HomeComponent {
 
-  ngOnInit(){
+  // private current:string ="/";
+  // private acti:string="bhome";
+  constructor(private router: Router,
+              private authenticationService: AuthenticationService) {
+  }
+
+  ngOnInit() {
     this.authenticationService.checkCredentials();
   }
 
@@ -20,7 +24,40 @@ export class HomeComponent{
     this.authenticationService.logout();
   }
 
-  gotoRegisterConference(): void {
-    this.router.navigate(['registerconf']);
-  }
+  // loadPage(data:string) {
+  //   let activePage = document.getElementById(this.acti);
+  //   console.log(activePage);
+  // }
+  //
+  // goTo(next:string,activv:string)
+  // {
+  //   if(this.current != "/") {
+  //     let varr = document.getElementById(this.current);
+  //     varr.style.display = "none";
+  //   }
+  //   else {
+  //     let varr = document.getElementById('bhome');
+  //     varr.classList.remove('active');
+  //   }
+  //   if(next === "/") {
+  //     this.router.navigate(["/home"]);
+  //     let varacti = document.getElementById(this.acti);
+  //     varacti.classList.remove('active');
+  //     let varr = document.getElementById("bhome");
+  //     varr.classList.add("active");
+  //     this.current="/";
+  //     this.acti="bhome";
+  //
+  //   }
+  //   else {
+  //     let varacti = document.getElementById(this.acti);
+  //     varacti.classList.remove('active');
+  //     this.current = next;
+  //     let varr = document.getElementById(next);
+  //     varr.style.display = "block";
+  //     varacti = document.getElementById(activv);
+  //     varacti.classList.add('active');
+  //     this.acti = activv;
+  //   }
+  // }
 }

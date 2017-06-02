@@ -7,6 +7,7 @@ import {Http, Response, Headers} from "@angular/http";
 import {Observable} from "rxjs";
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+import {HttpResponse} from "selenium-webdriver/http";
 
 @Injectable()
 export class ConferenceService {
@@ -35,13 +36,15 @@ export class ConferenceService {
   }
 
   private extractStatus(res: Response){
-    let status = res.statusText;
+    let status = res.status;
     console.log(status);
     return status;
   }
 
-  register(name: string, date: string): Observable<string> {
-    let conference = {name, date};
+
+  register(name: string, date: string, deadline: string): Observable<number> {
+    var ownerUsername = localStorage.getItem("user");
+    let conference = {name, date, deadline, ownerUsername};
     return this.http
       .post(this.conferenceUrl, JSON.stringify({"conference": conference}), {headers: this.headers})
       .map(this.extractStatus)
