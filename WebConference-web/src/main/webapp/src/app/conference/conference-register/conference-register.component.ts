@@ -1,7 +1,7 @@
 /**
  * Created by tudor on 06-May-17.
  */
-import {Component} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {Location} from '@angular/common';
 import {Router} from "@angular/router";
 
@@ -16,10 +16,15 @@ import {delay} from "rxjs/operator/delay";
 })
 
 export class RegisterConferenceComponent {
+
+
+
   constructor(private conferenceService: ConferenceService,
               private location: Location,
               private router: Router) {
+
   }
+
 
   goBack(): void {
     this.location.back();

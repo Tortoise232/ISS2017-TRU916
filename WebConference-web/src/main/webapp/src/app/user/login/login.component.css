@@ -160,7 +160,7 @@ body {
 }
 
 .card.alt .toggle:before {
-  content: '\f040';
+  content: '\f015';
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
 }
