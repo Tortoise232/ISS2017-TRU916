@@ -51,16 +51,25 @@ export class RegisterConferenceComponent {
     let invalidDate = document.getElementById("invalid-date");
     let success = document.getElementById("success");
     let failure = document.getElementById("failure");
+    let deadLineWrong = document.getElementById("deadLineWrong");
+
     required.style.display = "none";
     invalidDate.style.display = "none";
     success.style.display = "none";
     failure.style.display = "none";
+    deadLineWrong.style.display = "none";
 
     if (!name || !date) {
       console.log("All fields are required!");
       required.style.display = "block";
       return;
     }
+
+    if (date.valueOf() < deadline.valueOf()) {
+      deadLineWrong.style.display = "block";
+      return;
+    }
+
     //
     // let datePattern = /^[0-3]?[0-9]\/[01]?[0-9]\/[12][90][0-9][0-9]$/;
     // if(!datePattern.test(date)) {

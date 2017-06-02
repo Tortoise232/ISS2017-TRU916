@@ -154,7 +154,7 @@ body {
 .center_div{
   width: 25%;
 }
-#required, #invalid-date, #success, #failure{
+#required, #invalid-date, #success, #failure, #deadLineWrong{
   display: none;
 }
 /*input::-webkit-datetime-edit{ color: transparent; }*/
