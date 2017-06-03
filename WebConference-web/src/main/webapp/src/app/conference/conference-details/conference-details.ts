@@ -3,11 +3,12 @@
  */
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from "@angular/router";
-import {Location} from '@angular/common';
 
 import 'rxjs/add/operator/switchMap';
 import {Conference} from "../shared/conference.model";
 import {ConferenceService} from "../shared/conference.service";
+import {User} from "../../user/shared/user.model";
+import {AuthenticationService} from "../../user/shared/authentication.service";
 
 
 @Component({
@@ -20,19 +21,33 @@ export class ConferenceDetailsComponent implements OnInit {
 
   @Input()
   conference: Conference;
+  reviewers: User[];
+  attenders: User[];
+  speakers: User[];
+  owner: String;
+  currentUser: String;
 
   constructor(private conferenceService: ConferenceService,
               private route: ActivatedRoute,
-              private location: Location) {
+              private authenticationService: AuthenticationService) {
   }
 
   ngOnInit(): void{
+    this.authenticationService.checkCredentials();
     this.getConference();
+    this.currentUser = localStorage.getItem("user");
   }
 
   getConference() {
     this.route.params
       .switchMap((params: Params) => this.conferenceService.getConference(params['name']))
-      .subscribe(conference => this.conference = conference);
+      .subscribe(conference => {
+        this.conference = conference;
+        this.reviewers = conference.reviewers;
+        this.attenders = conference.attenders;
+        this.speakers = conference.speakers;
+        this.owner = conference.ownerUsername;
+        }
+      );
   }
 }

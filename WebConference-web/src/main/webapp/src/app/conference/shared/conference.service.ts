@@ -53,16 +53,11 @@ export class ConferenceService {
       .catch(this.handleError);
   }
 
-  private extractData(res: Response) {
-    let body = res.json();
-    return body;
-  }
-
   getConference(name: string): Observable<Conference>{
     const url = `${this.conferencesUrl}/${name}`;
     return this.http
       .get(url, {headers: this.headers})
-      .map(this.extractData)
+      .map((res: Response) => res.json())
       .catch(this.handleError);
   }
 }

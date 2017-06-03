@@ -89,6 +89,7 @@ public class ConferenceServiceImpl implements ConferenceService {
     }
 
     @Override
+    @Transactional
     public Conference findOne(String name) {
         log.trace("findConference: name={}", name);
         List<Conference> conferences = conferenceRepository.findAll();
