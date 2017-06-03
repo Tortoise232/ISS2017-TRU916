@@ -16,7 +16,8 @@ export class ConferenceService {
   private conferencesUrl = 'http://localhost:8080/api/conferences';
   private headers = new Headers({'Content-Type': 'application/json;charset=UTF-8'});
 
-  constructor(private http: Http) {}
+  constructor(private http: Http) {
+  }
 
   private handleError(error: Response | any) {
     console.log("error");
@@ -37,12 +38,11 @@ export class ConferenceService {
     return body.response || {};
   }
 
-  private extractStatus(res: Response){
+  private extractStatus(res: Response) {
     let status = res.status;
     console.log(status);
     return status;
   }
-
 
   register(name: string, date: string, deadline: string): Observable<number> {
     var ownerUsername = localStorage.getItem("user");
@@ -53,11 +53,24 @@ export class ConferenceService {
       .catch(this.handleError);
   }
 
+
   getConference(name: string): Observable<Conference>{
     const url = `${this.conferencesUrl}/${name}`;
     return this.http
       .get(url, {headers: this.headers})
       .map((res: Response) => res.json())
+  }
+  
+  private extractData(res: Response) {
+    let body = res.json();
+    console.log(body);
+    return body.conferences || null;
+  }
+
+  findAll(): Observable<Conference[]> {
+    return this.http
+      .get('http://localhost:8080/api/listconf', {headers: this.headers})
+      .map(this.extractData)
       .catch(this.handleError);
   }
 }

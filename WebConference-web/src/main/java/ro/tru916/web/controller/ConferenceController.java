@@ -47,13 +47,6 @@ public class ConferenceController {
         return response;
     }
 
-//    @RequestMapping(value = "/registerconf", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ConferencesDto getConferences() {
-//        log.trace("getConferences");
-//        List<Conference> conferences = conferenceService.findAll();
-//        log.trace("getConferences: conferences={}", conferences);
-//        return new ConferencesDto(conferences);
-//    }
 
     @RequestMapping(value = "/conferences/{name}", method = RequestMethod.GET)
     public ConferenceDto getConference(@PathVariable final String name) {
@@ -61,5 +54,13 @@ public class ConferenceController {
         Conference conference = conferenceService.findOne(name);
         log.trace("getConference: conference={}", conference);
         return conferenceConverter.convertModelToDto(conference);
+
+    @RequestMapping(value = "/listconf", method  = RequestMethod.GET)
+    public ConferencesDto getConferences() {
+        log.trace("getConferences");
+        List<Conference> conferences = conferenceService.findAll();
+        log.trace("getConferences: conferences={}", conferences);
+        return new ConferencesDto(conferences);
+
     }
 }
