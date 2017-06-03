@@ -3,30 +3,34 @@
  */
 
 
-import {Component} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {Location} from '@angular/common';
 import {Router} from "@angular/router";
 
 import {ConferenceService} from "../shared/conference.service";
+import {Conference} from "../shared/conference.model";
 
 @Component({
   moduleId: module.id,
   selector: 'list',
   templateUrl: './conference-list.component.html',
   styleUrls: ['./conference-list.component.css'],
+
 })
 
-export class ListConferenceComponent {
+export class ListConferenceComponent implements  OnInit{
+  conferences: Conference[];
   constructor(private conferenceService: ConferenceService,
               private location: Location,
-              private router: Router) {
+              private router: Router,) {
   }
-  
+
+  ngOnInit(): void {
+    this.listAll();
+  }
 
   listAll(){
-    let data;
-    let result = document.getElementById("result");
-    this.conferenceService.findAll().subscribe(conferences => data = JSON.stringify(conferences));
+    this.conferenceService.findAll().subscribe(conferences=>this.conferences=conferences);
   }
 }
 

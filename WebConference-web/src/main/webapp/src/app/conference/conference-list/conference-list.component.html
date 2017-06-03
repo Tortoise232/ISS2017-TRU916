@@ -9,6 +9,16 @@
   <!--<link rel="stylesheet" href="style.css">-->
 </head>
 <body>
-      <div id="result" (click)="listAll()"> STUFF WILL BE SHOWNN HERE</div>
+      <div id="result" (click)="listAll()"> BEHOLD, THE CONFERENCES</div>
+      <table>
+      <ul class="conferences">
+        <li *ngFor="let conference of conferences">
+          <b>{{conference.name}}</b><br>
+          <div>ID</div>{{conference.id}}<br>
+          <div>Date:</div>{{conference.date}}<br>
+          <div>Deadline:</div>{{conference.deadline}}<br>
+        </li>
+      </ul>
+      </table>
 </body>
 </html>

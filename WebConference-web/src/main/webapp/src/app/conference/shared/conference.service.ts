@@ -8,6 +8,7 @@ import {Observable} from "rxjs";
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import {HttpResponse} from "selenium-webdriver/http";
+import {Conference} from "./conference.model";
 
 @Injectable()
 export class ConferenceService {
@@ -42,12 +43,6 @@ export class ConferenceService {
     return status;
   }
 
-  private extractData(res: Response) {
-    let body = res.json();
-    console.log(body);
-    return body;
-  }
-
   register(name: string, date: string, deadline: string): Observable<number> {
     var ownerUsername = localStorage.getItem("user");
     let conference = {name, date, deadline, ownerUsername};
@@ -57,7 +52,13 @@ export class ConferenceService {
       .catch(this.handleError);
   }
 
-  findAll(): Observable<string> {
+  private extractData(res: Response) {
+    let body = res.json();
+    console.log(body);
+    return body.conferences || null;
+  }
+
+  findAll(): Observable<Conference[]> {
     return this.http
       .get('http://localhost:8080/api/listconf', {headers: this.headers})
       .map(this.extractData)
