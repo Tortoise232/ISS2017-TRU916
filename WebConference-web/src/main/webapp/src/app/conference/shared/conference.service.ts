@@ -14,7 +14,8 @@ export class ConferenceService {
   private conferenceUrl = 'http://localhost:8080/api/registerconf';
   private headers = new Headers({'Content-Type': 'application/json;charset=UTF-8'});
 
-  constructor(private http: Http) {}
+  constructor(private http: Http) {
+  }
 
   private handleError(error: Response | any) {
     console.log("error");
@@ -35,12 +36,17 @@ export class ConferenceService {
     return body.response || {};
   }
 
-  private extractStatus(res: Response){
+  private extractStatus(res: Response) {
     let status = res.status;
     console.log(status);
     return status;
   }
 
+  private extractData(res: Response) {
+    let body = res.json();
+    console.log(body);
+    return body;
+  }
 
   register(name: string, date: string, deadline: string): Observable<number> {
     var ownerUsername = localStorage.getItem("user");
@@ -48,6 +54,13 @@ export class ConferenceService {
     return this.http
       .post(this.conferenceUrl, JSON.stringify({"conference": conference}), {headers: this.headers})
       .map(this.extractStatus)
+      .catch(this.handleError);
+  }
+
+  findAll(): Observable<string> {
+    return this.http
+      .get('http://localhost:8080/api/listconf', {headers: this.headers})
+      .map(this.extractData)
       .catch(this.handleError);
   }
 }

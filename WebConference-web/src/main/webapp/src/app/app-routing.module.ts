@@ -6,12 +6,14 @@ import {LoginComponent} from "./user/login/login.component";
 import {RegisterComponent} from "./user/register/register.component";
 import {RegisterConferenceComponent} from "./conference/conference-register/conference-register.component";
 import {ProfileComponent} from "./user/profile/profile.component";
+import {ListConferenceComponent} from "./conference/conference-list/conference-list.component";
 
 const routes: Routes = [
     { path: 'home', component: HomeComponent},
     { path: 'login', component: LoginComponent},
     { path: 'register', component: RegisterComponent},
     { path: 'registerconf', component: RegisterConferenceComponent},
+    { path: 'listconf', component: ListConferenceComponent},
     { path: 'profile', component: ProfileComponent}
 ];
 @NgModule({

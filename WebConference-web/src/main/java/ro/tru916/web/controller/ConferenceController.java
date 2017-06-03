@@ -50,11 +50,11 @@ public class ConferenceController {
         return response;
     }
 
-//    @RequestMapping(value = "/registerconf", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ConferencesDto getConferences() {
-//        log.trace("getConferences");
-//        List<Conference> conferences = conferenceService.findAll();
-//        log.trace("getConferences: conferences={}", conferences);
-//        return new ConferencesDto(conferences);
-//    }
+    @RequestMapping(value = "/listconf", method  = RequestMethod.GET)
+    public ConferencesDto getConferences() {
+        log.trace("getConferences");
+        List<Conference> conferences = conferenceService.findAll();
+        log.trace("getConferences: conferences={}", conferences);
+        return new ConferencesDto(conferences);
+    }
 }
