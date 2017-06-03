@@ -1,24 +1,41 @@
 <!DOCTYPE html>
 <html >
 <head>
-  <meta charset="UTF-8">
-  <title>List Conference</title>
-  <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
-  <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
-  <!--<link rel="stylesheet" href="login.component.css">-->
-  <!--<link rel="stylesheet" href="style.css">-->
+  <meta charset="utf-8">
+  <title>Conference List</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 <body>
-      <div id="result" (click)="listAll()"> BEHOLD, THE CONFERENCES</div>
-      <table>
-      <ul class="conferences">
-        <li *ngFor="let conference of conferences">
-          <b>{{conference.name}}</b><br>
-          <div>ID</div>{{conference.id}}<br>
-          <div>Date:</div>{{conference.date}}<br>
-          <div>Deadline:</div>{{conference.deadline}}<br>
-        </li>
-      </ul>
+<home></home>
+<!-- DON'T TALK TO ME -->
+<br><br><br><br>
+<!-- DON'T TALK TO ME -->
+<div id="result" (click)="listAll()"><h1> BEHOLD, THE <u>C O N F E R E N C E S</u> </h1></div>
+<!-- DON'T TALK TO ME -->
+<br><br><br><br>
+<!-- DON'T TALK TO ME -->
+      <table border='2px' cellspacing="10px" id="table">
+      <thead>
+        <th>Name</th>
+        <th>ID</th>
+        <th>Date</th>
+        <th>Deadline</th>
+      </thead>
+
+      <tbody class="conferences">
+        <tr *ngFor="let conference of conferences">
+          <td><b>{{conference.name}}</b></td>
+          <td>{{conference.id}}</td>
+          <td>{{conference.date}}</td>
+          <td>{{conference.deadline}}</td>
+        </tr>
+      </tbody>
       </table>
 </body>
 </html>
