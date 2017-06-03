@@ -13,6 +13,7 @@ import {Conference} from "./conference.model";
 @Injectable()
 export class ConferenceService {
   private conferenceUrl = 'http://localhost:8080/api/registerconf';
+  private conferencesUrl = 'http://localhost:8080/api/conferences';
   private headers = new Headers({'Content-Type': 'application/json;charset=UTF-8'});
 
   constructor(private http: Http) {
@@ -52,6 +53,14 @@ export class ConferenceService {
       .catch(this.handleError);
   }
 
+
+  getConference(name: string): Observable<Conference>{
+    const url = `${this.conferencesUrl}/${name}`;
+    return this.http
+      .get(url, {headers: this.headers})
+      .map((res: Response) => res.json())
+  }
+  
   private extractData(res: Response) {
     let body = res.json();
     console.log(body);

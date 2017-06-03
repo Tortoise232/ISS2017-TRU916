@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <home></home>
+
+  <div *ngIf="conference && (owner == currentUser)">
+    <div class="title">
+      <h1>{{conference.name}}</h1>
+      <h2>Conference Management</h2>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <div>
+            <h2>Name</h2>
+            <input type="text" value="{{conference.name}}"> <button>✔</button>
+          </div>
+          <div>
+            <h2>Conference Date</h2>
+            <input value="{{conference.date}}"> <button>✔</button>
+          </div>
+          <div>
+            <h2>Registration Deadline</h2>
+            <input value="{{conference.deadline}}"> <button>✔</button>
+          </div>
+          <div>
+            <h2>Reviewers </h2>
+            <ol>
+              <li>Bartholomew Cubbins<button>✘</button></li>
+              <li>Benjamin Bicklebaum<button>✘</button></li>
+              <li>Sally Spingel Spugel Sporn<button>✘</button></li>
+              <li *ngFor="let reviewer of reviewers">
+                {{reviewer.name}}
+                <button>✘</button>
+              </li>
+            </ol>
+            <button class="btn btn-primary">Add Reviewer</button>
+          </div>
+          <div>
+            <h2>Attenders </h2>
+            <ol>
+              <li>Bartholomew Cubbins<button>✘</button></li>
+              <li>Benjamin Bicklebaum<button>✘</button></li>
+              <li>Sally Spingel Spugel Sporn<button>✘</button></li>
+              <li *ngFor="let attender of attenders">
+                {{attender.name}}
+                <button>✘</button>
+              </li>
+            </ol>
+          </div>
+          <div>
+            <h2>Speakers </h2>
+            <ol>
+              <li>Bartholomew Cubbins<button>✘</button></li>
+              <li>Benjamin Bicklebaum<button>✘</button></li>
+              <li>Sally Spingel Spugel Sporn<button>✘</button></li>
+              <li *ngFor="let speaker of speakers">
+                {{speaker.name}}
+                <button>✘</button>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="conference && (owner != currentUser)">
+    <div class="title">
+      <h1>{{conference.name}}</h1>
+      <h2> Conference Details </h2>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <div>
+            <h2>General conference information</h2>
+            <p>
+              The conference will take place on {{conference.date}}.
+              <br>
+              All conference sessions are hosted in the Auditorium Maximum at The Babeș-Bolyai University in Cluj-Napoca, Cluj County, Romania.
+              <br>
+              If you have any questions, please contact {{conference.ownerUsername}} via email at dr-seuss@ubb.edu or by phone at 505-505-505.
+            </p>
+          </div>
+          <div>
+            <h2>Organizer</h2>
+            <i>{{conference.ownerUsername}}</i>
+          </div>
+          <div>
+            <h2>Application</h2>
+            <button class="btn btn-primary">Attend</button>
+            <button class="btn btn-primary">Submit Paper</button>
+            <p><br>Please apply by {{conference.deadline}} .</p>
+          </div>
+          <div>
+            <h2>Attenders</h2>
+            <ol>
+              <li>Bartholomew Cubbins</li>
+              <li>Benjamin Bicklebaum</li>
+              <li>Sally Spingel Spugel Sporn</li>
+              <li *ngFor="let attender of attenders">
+                {{attender.name}}
+              </li>
+            </ol>
+          </div>
+          <div>
+            <h2>Featured Speakers</h2>
+            <ol>
+              <li>Bartholomew Cubbins</li>
+              <li>Benjamin Bicklebaum</li>
+              <li>Sally Spingel Spugel Sporn</li>
+              <li *ngFor="let speaker of speakers">
+                {{speaker.name}}
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
