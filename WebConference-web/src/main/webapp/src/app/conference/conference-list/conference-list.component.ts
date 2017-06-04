@@ -32,5 +32,9 @@ export class ListConferenceComponent implements  OnInit{
   listAll(){
     this.conferenceService.findAll().subscribe(conferences=>this.conferences=conferences);
   }
+
+  goToConfView(name){
+    this.router.navigateByUrl("/conferences/" + name);
+  }
 }
 

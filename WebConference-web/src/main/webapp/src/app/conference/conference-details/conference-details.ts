@@ -33,6 +33,7 @@ export class ConferenceDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void{
+    console.log("REACHED ME");
     this.authenticationService.checkCredentials();
     this.getConference();
     this.currentUser = localStorage.getItem("user");
