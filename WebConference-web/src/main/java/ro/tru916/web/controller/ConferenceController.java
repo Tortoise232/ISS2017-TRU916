@@ -64,4 +64,22 @@ public class ConferenceController {
         return new ConferencesDto(conferenceConverter.convertModelsToDtos(conferences));
 
     }
+
+    @RequestMapping(value = "/conferences/{oldName}", method = RequestMethod.PUT)
+    public ResponseEntity updateConference(
+            @PathVariable final String oldName,
+            @RequestBody final Map<String, ConferenceDto> confDtoMap) {
+        log.trace("updateConference: oldName={}, confDtoMap={}", oldName, confDtoMap);
+        ConferenceDto conf = confDtoMap.get("conference");
+        ResponseEntity response;
+        try{
+            conferenceService.updateConference(oldName, conf.getName(), conf.getDate(), conf.getDeadline());
+            response = new ResponseEntity("success",HttpStatus.CREATED);
+            log.trace("updateConference success");
+        }catch(RuntimeException e){
+            response = new ResponseEntity(e.getMessage(),HttpStatus.IM_USED);
+            log.trace("updateConference failure");
+        }
+        return response;
+    }
 }

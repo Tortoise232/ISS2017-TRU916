@@ -8,7 +8,6 @@
 </head>
 <body>
   <home></home>
-
   <div *ngIf="conference && (owner == currentUser)">
     <div class="title">
       <h1>{{conference.name}}</h1>
@@ -17,18 +16,30 @@
     <div class="container">
       <div class="row">
         <div class="col-md-6 col-md-offset-3">
-          <div>
-            <h2>Name</h2>
-            <input type="text" value="{{conference.name}}"> <button>✔</button>
-          </div>
-          <div>
-            <h2>Conference Date</h2>
-            <input value="{{conference.date}}"> <button>✔</button>
-          </div>
-          <div>
-            <h2>Registration Deadline</h2>
-            <input value="{{conference.deadline}}"> <button>✔</button>
-          </div>
+          <form>
+            <div>
+              <h2>Name</h2>
+              <input type="text" value="{{conference.name}}" id="name" #name/>
+            </div>
+            <div>
+              <h2>Conference Date</h2>
+              <input value="{{conference.date}}" id="date" #date/>
+            </div>
+            <div>
+              <h2>Registration Deadline</h2>
+              <input value="{{conference.deadline}}" id="deadline" #deadline/>
+            </div>
+            <button class="btn btn-primary" (click)="update(name.value,date.value,deadline.value)">Save</button>
+            <div id="success" class="alert alert-success" align="center">
+              <strong>The conference was successfully updated.</strong>
+            </div>
+            <div id="failure" class="alert alert-danger" align="center">
+              <strong>The conference could not be updated.</strong>
+            </div>
+            <div id="required" class="alert alert-danger" align="center">
+              <strong>All the fields are required.</strong>
+            </div>
+          </form>
           <div>
             <h2>Reviewers </h2>
             <ol>
@@ -40,6 +51,7 @@
                 <button>✘</button>
               </li>
             </ol>
+            <input placeholder="Username" type="text">
             <button class="btn btn-primary">Add Reviewer</button>
           </div>
           <div>
