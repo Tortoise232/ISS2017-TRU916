@@ -20,23 +20,18 @@
 <!-- DON'T TALK TO ME -->
 <br><br><br><br>
 <!-- DON'T TALK TO ME -->
-      <table border='2px' cellspacing="10px" id="table">
-      <thead>
-        <th>Name</th>
-        <th>ID</th>
-        <th>Date</th>
-        <th>Deadline</th>
-      </thead>
-
-      <tbody class="conferences">
-        <tr *ngFor="let conference of conferences">
-          <td><b id="name">{{conference.name}}</b></td>
-          <td>{{conference.id}}</td>
-          <td>{{conference.date}}</td>
-          <td>{{conference.deadline}}</td>
-          <td><button (click)="goToConfView(conference.name)"><span>View Conference</span></button></td>
-        </tr>
-      </tbody>
-      </table>
+        <ul style="list-style: none;" *ngFor="let conference of conferences">
+          <div class="conference">
+            <li>
+          <ul style="list-style: none;">
+            <li><b id='name'>{{conference.name}}</b></li>
+           <li>Conference ID: {{conference.id}}</li>
+           <li>Conference Date: {{conference.date}}</li>
+           <li>Submission Deadline: {{conference.deadline}}</li>
+           <li><button (click)="goToConfView(conference.name)"><span>View Conference</span></button></li>
+          </ul>
+          </li>
+          </div>
+          </ul>
 </body>
 </html>
