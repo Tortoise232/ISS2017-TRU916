@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ro.tru916.core.model.User;
 import ro.tru916.core.repository.UserRepository;
+import ro.tru916.core.util.EmailSender;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Calendar;
@@ -38,6 +39,20 @@ public class UserServiceImpl implements UserService {
         User user = new User(name, decodedPassword, username, registerdate, email, type);
         try {
             userRepository.save(user);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        String[] to = {user.getEmail()};
+                        EmailSender.SendMail("Welcome to WebConference "
+                                + user.getName() + ", your account has been created with username "+user.getUsername()+" !", to);
+                        System.out.println("Succes, email sent to "+user.getUsername());
+                    }
+                    catch(Exception e) {
+                        System.err.println("Error at sending email to "+user.getUsername());
+                    }
+                }
+            }).start();
         }catch(ConstraintViolationException e){
             throw new RuntimeException("Username must be unique.");
 
