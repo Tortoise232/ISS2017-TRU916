@@ -19,3 +19,7 @@ h2{
 .title{
   text-align: center;
 }
+
+#success, #failure, #required{
+  display: none;
+}

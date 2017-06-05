@@ -20,6 +20,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -102,5 +103,47 @@ public class ConferenceServiceImpl implements ConferenceService {
         }
         log.trace("findConference: conference={}", conference);
         return conference;
+    }
+
+    @Override
+    @Transactional
+    public void updateConference(String oldName, String name, String date, String deadline) {
+        log.trace("updateConference: name={}, date={}, deadline={}", name, date, deadline);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+        Conference conference = findOne(oldName);
+        try {
+            conference.setName(name);
+            Date confDate = format.parse(date);
+            Date confDeadline = format.parse(deadline);
+            conference.setDate(confDate);
+            conference.setDate(confDeadline);
+        }catch(ParseException e){
+            throw new RuntimeException("Date format invalid.");
+        }
+        log.trace("updateConference: conference={}", conference);
+    }
+
+    @Override
+    @Transactional
+    public void addReviewer(String conferenceName, String userName) {
+        log.trace("updateConference: conferenceName={}, userName={}", conferenceName, userName);
+        Conference conference = findOne(conferenceName);
+        User user = findUser(userName);
+        Set<User> reviewers = conference.getReviewers();
+        reviewers.add(user);
+        conference.setReviewers(reviewers);
+        log.trace("updateConference: conference={}", conference);
+    }
+
+    @Override
+    @Transactional
+    public void addAttender(String conferenceName, String userName) {
+        log.trace("updateConference: conferenceName={}, userName={}", conferenceName, userName);
+        Conference conference = findOne(conferenceName);
+        User user = findUser(userName);
+        Set<User> attenders = conference.getAttendanceUsers();
+        attenders.add(user);
+        conference.setAttendanceUsers(attenders);
+        log.trace("updateConference: conference={}", conference);
     }
 }
