@@ -82,4 +82,40 @@ public class ConferenceController {
         }
         return response;
     }
+
+    @RequestMapping(value = "/conferences/{name}/add-reviewer", method = RequestMethod.PUT)
+    public ResponseEntity addReviewer(
+            @PathVariable final String name,
+            @RequestBody final String userName) {
+        String reviewer = userName.replaceAll("\"","");
+        log.trace("addReviewer: name={}, reviewer={}", name, reviewer);
+        ResponseEntity response;
+        try{
+            conferenceService.addReviewer(name, reviewer);
+            response = new ResponseEntity("success",HttpStatus.CREATED);
+            log.trace("addReviewer success");
+        }catch(RuntimeException e){
+            response = new ResponseEntity(e.getMessage(),HttpStatus.IM_USED);
+            log.trace("addReviewer failure");
+        }
+        return response;
+    }
+
+    @RequestMapping(value = "/conferences/{name}/attend", method = RequestMethod.PUT)
+    public ResponseEntity addAttender(
+            @PathVariable final String name,
+            @RequestBody final String userName) {
+        String attender = userName.replaceAll("\"","");
+        log.trace("addAttender: name={}, attender={}", name, attender);
+        ResponseEntity response;
+        try{
+            conferenceService.addAttender(name, attender);
+            response = new ResponseEntity("success",HttpStatus.CREATED);
+            log.trace("addAttender success");
+        }catch(RuntimeException e){
+            response = new ResponseEntity(e.getMessage(),HttpStatus.IM_USED);
+            log.trace("addAttender failure");
+        }
+        return response;
+    }
 }

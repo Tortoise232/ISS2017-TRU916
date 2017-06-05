@@ -14,6 +14,8 @@ const routes: Routes = [
     { path: 'register', component: RegisterComponent},
     { path: 'registerconf', component: RegisterConferenceComponent},
     { path: 'conferences/:name', component: ConferenceDetailsComponent},
+    { path: 'conferences/:name/add-reviewer', component: ConferenceDetailsComponent},
+    { path: 'conferences/:name/attend', component: ConferenceDetailsComponent},
     { path: 'listconf', component: ListConferenceComponent},
     { path: 'profile', component: ProfileComponent}
 ];

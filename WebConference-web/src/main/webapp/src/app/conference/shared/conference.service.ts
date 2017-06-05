@@ -74,4 +74,20 @@ export class ConferenceService {
       .map(this.extractStatus)
       .catch(this.handleError);
   }
+
+  addReviewer(conferenceName: string, userName: string): Observable<number>{
+    const url = `${this.conferencesUrl}/${conferenceName}/add-reviewer`;
+    return this.http
+      .put(url, JSON.stringify(userName), {headers: this.headers})
+      .map(this.extractStatus)
+      .catch(this.handleError);
+  }
+
+  addAttender(conferenceName: string, userName: string): Observable<number>{
+    const url = `${this.conferencesUrl}/${conferenceName}/attend`;
+    return this.http
+      .put(url, JSON.stringify(userName), {headers: this.headers})
+      .map(this.extractStatus)
+      .catch(this.handleError);
+  }
 }

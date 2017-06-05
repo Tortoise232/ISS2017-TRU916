@@ -20,6 +20,14 @@ h2{
   text-align: center;
 }
 
-#success, #failure, #required{
+#update-success, #update-failure, #update-required{
+  display: none;
+}
+
+#add-reviewer-success, #add-reviewer-failure, #add-reviewer-required{
+  display: none;
+}
+
+#attend-success, #attend-failure{
   display: none;
 }
