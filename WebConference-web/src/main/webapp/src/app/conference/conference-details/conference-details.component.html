@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <home></home>
+  <div *ngIf="conference && (owner == currentUser)">
+    <div class="title">
+      <h1>{{conference.name}}</h1>
+      <h2>Conference Management</h2>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <form>
+            <div>
+              <h2>Name</h2>
+              <input type="text" value="{{conference.name}}" id="name" #name/>
+            </div>
+            <div>
+              <h2>Conference Date</h2>
+              <input value="{{conference.date}}" id="date" #date/>
+            </div>
+            <div>
+              <h2>Registration Deadline</h2>
+              <input value="{{conference.deadline}}" id="deadline" #deadline/>
+            </div>
+            <button class="btn btn-primary" (click)="update(name.value,date.value,deadline.value)">Save</button>
+            <div id="update-success" class="alert alert-success" align="center">
+              <strong>The conference was successfully updated.</strong>
+            </div>
+            <div id="update-failure" class="alert alert-danger" align="center">
+              <strong>The conference could not be updated.</strong>
+            </div>
+            <div id="update-required" class="alert alert-danger" align="center">
+              <strong>All the fields are required.</strong>
+            </div>
+          </form>
+          <div>
+            <h2>Reviewers </h2>
+            <ol id="reviewer-list-owner">
+              <li>Bartholomew Cubbins<button>✘</button></li>
+              <li>Benjamin Bicklebaum<button>✘</button></li>
+              <li>Sally Spingel Spugel Sporn<button>✘</button></li>
+              <li *ngFor="let reviewer of reviewers">
+                {{reviewer.name}}
+                <button>✘</button>
+              </li>
+            </ol>
+            <form>
+              <input placeholder="Username" type="text" id="reviewer" #reviewer/>
+              <button class="btn btn-primary" (click)="addReviewer(reviewer.value)">Add</button>
+            </form>
+            <div id="add-reviewer-success" class="alert alert-success" align="center">
+              <strong>The reviewer was successfully added to the list.</strong>
+            </div>
+            <div id="add-reviewer-failure" class="alert alert-danger" align="center">
+              <strong>This reviewer could not be added to the list.</strong>
+            </div>
+            <div id="add-reviewer-required" class="alert alert-danger" align="center">
+              <strong>You must specify the reviewer's username.</strong>
+            </div>
+          </div>
+          <div>
+            <h2>Attenders </h2>
+            <ol id="attender-list-owner">
+              <li>Bartholomew Cubbins<button>✘</button></li>
+              <li>Benjamin Bicklebaum<button>✘</button></li>
+              <li>Sally Spingel Spugel Sporn<button>✘</button></li>
+              <li *ngFor="let attender of attenders">
+                {{attender.name}}
+                <button>✘</button>
+              </li>
+            </ol>
+          </div>
+          <div>
+            <h2>Speakers </h2>
+            <ol id="speaker-list-owner">
+              <li>Bartholomew Cubbins<button>✘</button></li>
+              <li>Benjamin Bicklebaum<button>✘</button></li>
+              <li>Sally Spingel Spugel Sporn<button>✘</button></li>
+              <li *ngFor="let speaker of speakers">
+                {{speaker.name}}
+                <button>✘</button>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="conference && (owner != currentUser)">
+    <div class="title">
+      <h1>{{conference.name}}</h1>
+      <h2> Conference Details </h2>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <div>
+            <h2>General conference information</h2>
+            <p>
+              The conference will take place on {{conference.date}}.
+              <br>
+              All conference sessions are hosted in the Auditorium Maximum at The Babeș-Bolyai University in Cluj-Napoca, Cluj County, Romania.
+              <br>
+              If you have any questions, please contact {{conference.ownerUsername}} via email at dr-seuss@ubb.edu or by phone at 505-505-505.
+            </p>
+          </div>
+          <div>
+            <h2>Organizer</h2>
+            <i>{{conference.ownerUsername}}</i>
+          </div>
+          <div>
+            <h2>Application</h2>
+            <button class="btn btn-primary" (click)="attend()">Attend</button>
+            <button class="btn btn-primary">Submit Paper</button>
+            <p><br>Please apply by {{conference.deadline}} .</p>
+            <div id="attend-success" class="alert alert-success" align="center">
+              <strong>You are now attending this conference.</strong>
+            </div>
+            <div id="attend-failure" class="alert alert-danger" align="center">
+              <strong>You are already attending this conference.</strong>
+            </div>
+          </div>
+          <div>
+            <h2>Attenders</h2>
+            <ol id="attender-list-user">
+              <li>Bartholomew Cubbins</li>
+              <li>Benjamin Bicklebaum</li>
+              <li>Sally Spingel Spugel Sporn</li>
+              <li *ngFor="let attender of attenders">
+                {{attender.name}}
+              </li>
+            </ol>
+          </div>
+          <div>
+            <h2>Featured Speakers</h2>
+            <ol id="speaker-list-user">
+              <li>Bartholomew Cubbins</li>
+              <li>Benjamin Bicklebaum</li>
+              <li>Sally Spingel Spugel Sporn</li>
+              <li *ngFor="let speaker of speakers">
+                {{speaker.name}}
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

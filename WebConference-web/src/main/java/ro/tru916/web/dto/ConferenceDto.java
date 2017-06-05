@@ -1,6 +1,6 @@
 package ro.tru916.web.dto;
 
-import java.util.Date;
+import java.util.Set;
 
 /**
  * Created by tudor on 06-May-17.
@@ -10,6 +10,9 @@ public class ConferenceDto extends BaseDto {
     private String date;
     private String deadline;
     private String ownerUsername;
+    private Set<UserDto> reviewers;
+    private Set<UserDto> attenders;
+    private Set<UserDto> speakers;
 
     public ConferenceDto(String name, String date, String deadline, String ownerUsername) {
         this.name = name;
@@ -42,6 +45,30 @@ public class ConferenceDto extends BaseDto {
 
     public void setOwnerUsername(String ownerUsername) { this.ownerUsername = ownerUsername; }
 
+    public Set<UserDto> getReviewers() {
+        return reviewers;
+    }
+
+    public void setReviewers(Set<UserDto> reviewers) {
+        this.reviewers = reviewers;
+    }
+
+    public Set<UserDto> getAttenders() {
+        return attenders;
+    }
+
+    public void setAttenders(Set<UserDto> attenders) {
+        this.attenders = attenders;
+    }
+
+    public Set<UserDto> getSpeakers() {
+        return speakers;
+    }
+
+    public void setSpeakers(Set<UserDto> speakers) {
+        this.speakers = speakers;
+    }
+
     @Override
     public String toString() {
         return "ConferenceDto{" +
@@ -49,6 +76,9 @@ public class ConferenceDto extends BaseDto {
                 ", date='" + date + '\'' +
                 ", deadline='" + deadline + '\'' +
                 ", ownerUsername='" + ownerUsername + '\'' +
-                '}';
+                ", reviewers=" + reviewers +
+                ", attenders=" + attenders +
+                ", speakers=" + speakers +
+                "} " + super.toString();
     }
 }

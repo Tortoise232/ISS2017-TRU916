@@ -11,5 +11,8 @@ import java.util.List;
 public interface ConferenceService {
     void addConference(String name, String date,String deadline,String ownerUsername) throws RuntimeException;
     List<Conference> findAll();
-
+    Conference findOne(String name);
+    void updateConference(String oldName, String name, String date, String deadline);
+    void addReviewer(String conferenceName, String userName);
+    void addAttender(String conferenceName, String userName);
 }

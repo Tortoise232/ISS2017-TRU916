@@ -1,26 +1,25 @@
 package ro.tru916.web.dto;
 
-import ro.tru916.core.model.Conference;
-
-import java.util.List;
+import java.util.Set;
 
 /**
  * Created by tudor on 27-May-17.
  */
 public class ConferencesDto {
-    private List<Conference> conferences;
+    private Set<ConferenceDto> conferences;
 
-    public ConferencesDto(){}
-
-    public ConferencesDto(List<Conference> conferences){
+    public ConferencesDto(Set<ConferenceDto> conferences) {
         this.conferences = conferences;
     }
 
-    public List<Conference> getConferences(){
-        return this.conferences;
+    public ConferencesDto() {
     }
 
-    public void setConferences(List<Conference> conferences){
+    public Set<ConferenceDto> getConferences() {
+        return conferences;
+    }
+
+    public void setConferences(Set<ConferenceDto> conferences) {
         this.conferences = conferences;
     }
 }

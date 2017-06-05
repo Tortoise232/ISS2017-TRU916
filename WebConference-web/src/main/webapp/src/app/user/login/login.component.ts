@@ -24,22 +24,20 @@ export class LoginComponent{
   }
 
   login(username, password): void{
-    let encodedPassword = btoa(password);
-    this.authenticationService.login(username, encodedPassword);
-
     let failure = document.getElementById("failure");
-    let failureUserPass = document.getElementById("failureUserPass");
-
-    failureUserPass.style.display = "none";
     failure.style.display = "none";
-
     if (username == "" || password == "") {
       failure.style.display = "block";
     }
-    else if(localStorage.getItem("user") == null) {
+
+    let encodedPassword = btoa(password);
+    this.authenticationService.login(username, encodedPassword);
+
+    let failureUserPass = document.getElementById("failureUserPass");
+    failureUserPass.style.display = "none";
+    if(localStorage.getItem("user") == null) {
       failureUserPass.style.display = "block";
     }
-
   }
 
   eventHandler(keyCode,username,password) {

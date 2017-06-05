@@ -11,18 +11,22 @@ import {UserService} from "./user/shared/user.service";
 import {HomeComponent} from "./home/home.component";
 import {LoginComponent} from "./user/login/login.component";
 import {RegisterConferenceComponent} from "./conference/conference-register/conference-register.component";
+import {ListConferenceComponent} from "./conference/conference-list/conference-list.component";
 import {ConferenceService} from "./conference/shared/conference.service";
 import {AuthenticationService} from "./user/shared/authentication.service";
 import {ProfileComponent} from "./user/profile/profile.component";
+import {ConferenceDetailsComponent} from "./conference/conference-details/conference-details";
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
     RegisterConferenceComponent,
+    ListConferenceComponent,
     HomeComponent,
     LoginComponent,
-    ProfileComponent
+    ProfileComponent,
+    ConferenceDetailsComponent
   ],
   imports: [
     BrowserModule,
