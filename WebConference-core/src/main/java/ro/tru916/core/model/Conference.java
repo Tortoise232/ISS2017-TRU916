@@ -1,7 +1,5 @@
 package ro.tru916.core.model;
 
-import lombok.*;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -26,16 +24,25 @@ public class Conference extends BaseEntity<Long> {
     @OneToMany(mappedBy = "paper")
     private Set<Paper> papers = new HashSet<>();
 
-    @ManyToMany(mappedBy = "reviewer",fetch = FetchType.EAGER)
-    private Set<User> reviewers = new HashSet<>();
-
-    @ManyToMany(mappedBy = "speaker",fetch = FetchType.EAGER)
-    private Set<User> speakers = new HashSet<>();
-
     @OneToMany(mappedBy = "accepted",fetch = FetchType.EAGER)
     private Set<Paper> acceptedpapers = new HashSet<>();
 
-    @ManyToMany(mappedBy = "attendance",fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "CONFERENCE_REVIEWERS",
+            joinColumns = @JoinColumn(name = "conference_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
+    private Set<User> reviewers = new HashSet<>();
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "CONFERENCE_SPEAKERS",
+            joinColumns = @JoinColumn(name = "conference_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
+    private Set<User> speakers = new HashSet<>();
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "CONFERENCE_ATTENDANCE",
+            joinColumns = @JoinColumn(name = "conference_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
     private Set<User> attendanceUsers = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.EAGER)

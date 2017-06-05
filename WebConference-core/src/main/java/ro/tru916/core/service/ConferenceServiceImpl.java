@@ -1,11 +1,8 @@
 package ro.tru916.core.service;
 
-import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ro.tru916.core.model.Conference;
@@ -13,9 +10,6 @@ import ro.tru916.core.model.User;
 import ro.tru916.core.repository.ConferenceRepository;
 import ro.tru916.core.repository.UserRepository;
 
-import javax.persistence.RollbackException;
-import java.sql.SQLDataException;
-import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -37,30 +31,20 @@ public class ConferenceServiceImpl implements ConferenceService {
     @Autowired
     private UserRepository userRepository;
 
-
     @Override
     @Transactional
     public void addConference(String name, String date,String deadline,String ownerUsername) throws RuntimeException {
-        log.trace("ADD CINFERENCE");
-        log.trace("\n\n\naddConference:owner={} \n\n\n"+ownerUsername);
-
+        log.trace("addConference:owner={}" + ownerUsername);
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
         try {
             Date confDate = format.parse(date);
             Date confDeadline = format.parse(deadline);
             User confOwner = findUser(ownerUsername);
-            Conference conference = new Conference(name, confDate,confDeadline,confOwner);//Am pus aici ca deadline-ul sa fie chiar in data de incepere a conferintei
-            //dar trebue setat de user
-            //de asemenea trebe sa
-
+            Conference conference = new Conference(name, confDate,confDeadline,confOwner);
             try {
                 conferenceRepository.saveAndFlush(conference);
             }
-//             catch ( ConstraintViolationException e) {
-//                log.trace("CONFERENCE ERROR SAVE");
-//
-//            }
             catch(Exception e)
             {
                 throw new RuntimeException("Conference must be unique.");
@@ -71,6 +55,7 @@ public class ConferenceServiceImpl implements ConferenceService {
             throw new RuntimeException("Date format invalid.");
         }
     }
+
     private User findUser(String username){
         Iterable<User> users = this.userRepository.findAll();
         for (User user: users) {
@@ -126,24 +111,28 @@ public class ConferenceServiceImpl implements ConferenceService {
     @Override
     @Transactional
     public void addReviewer(String conferenceName, String userName) {
-        log.trace("updateConference: conferenceName={}, userName={}", conferenceName, userName);
+        log.trace("addReviewer begin: conferenceName={}, userName={}", conferenceName, userName);
         Conference conference = findOne(conferenceName);
         User user = findUser(userName);
         Set<User> reviewers = conference.getReviewers();
+        if(reviewers.contains(user))
+            throw new RuntimeException("The user is already a reviewer!");
         reviewers.add(user);
         conference.setReviewers(reviewers);
-        log.trace("updateConference: conference={}", conference);
+        log.trace("addReviewer end: conference={}", conference);
     }
 
     @Override
     @Transactional
     public void addAttender(String conferenceName, String userName) {
-        log.trace("updateConference: conferenceName={}, userName={}", conferenceName, userName);
+        log.trace("addAttender: conferenceName={}, userName={}", conferenceName, userName);
         Conference conference = findOne(conferenceName);
         User user = findUser(userName);
         Set<User> attenders = conference.getAttendanceUsers();
+        if(attenders.contains(user))
+            throw new RuntimeException("The user is already an attender!");
         attenders.add(user);
         conference.setAttendanceUsers(attenders);
-        log.trace("updateConference: conference={}", conference);
+        log.trace("addAttender: conference={}", conference);
     }
 }
