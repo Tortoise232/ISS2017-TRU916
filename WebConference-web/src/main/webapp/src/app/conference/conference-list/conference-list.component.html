@@ -30,10 +30,11 @@
 
       <tbody class="conferences">
         <tr *ngFor="let conference of conferences">
-          <td><b>{{conference.name}}</b></td>
+          <td><b id="name">{{conference.name}}</b></td>
           <td>{{conference.id}}</td>
           <td>{{conference.date}}</td>
           <td>{{conference.deadline}}</td>
+          <td><button (click)="goToConfView(conference.name)"><span>View Conference</span></button></td>
         </tr>
       </tbody>
       </table>
