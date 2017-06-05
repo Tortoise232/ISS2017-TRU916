@@ -30,19 +30,19 @@
               <input value="{{conference.deadline}}" id="deadline" #deadline/>
             </div>
             <button class="btn btn-primary" (click)="update(name.value,date.value,deadline.value)">Save</button>
-            <div id="success" class="alert alert-success" align="center">
+            <div id="update-success" class="alert alert-success" align="center">
               <strong>The conference was successfully updated.</strong>
             </div>
-            <div id="failure" class="alert alert-danger" align="center">
+            <div id="update-failure" class="alert alert-danger" align="center">
               <strong>The conference could not be updated.</strong>
             </div>
-            <div id="required" class="alert alert-danger" align="center">
+            <div id="update-required" class="alert alert-danger" align="center">
               <strong>All the fields are required.</strong>
             </div>
           </form>
           <div>
             <h2>Reviewers </h2>
-            <ol>
+            <ol id="reviewer-list-owner">
               <li>Bartholomew Cubbins<button>✘</button></li>
               <li>Benjamin Bicklebaum<button>✘</button></li>
               <li>Sally Spingel Spugel Sporn<button>✘</button></li>
@@ -51,12 +51,23 @@
                 <button>✘</button>
               </li>
             </ol>
-            <input placeholder="Username" type="text">
-            <button class="btn btn-primary">Add Reviewer</button>
+            <form>
+              <input placeholder="Username" type="text" id="reviewer" #reviewer/>
+              <button class="btn btn-primary" (click)="addReviewer(reviewer.value)">Add</button>
+            </form>
+            <div id="add-reviewer-success" class="alert alert-success" align="center">
+              <strong>The reviewer was successfully added to the list.</strong>
+            </div>
+            <div id="add-reviewer-failure" class="alert alert-danger" align="center">
+              <strong>This reviewer could not be added to the list.</strong>
+            </div>
+            <div id="add-reviewer-required" class="alert alert-danger" align="center">
+              <strong>You must specify the reviewer's username.</strong>
+            </div>
           </div>
           <div>
             <h2>Attenders </h2>
-            <ol>
+            <ol id="attender-list-owner">
               <li>Bartholomew Cubbins<button>✘</button></li>
               <li>Benjamin Bicklebaum<button>✘</button></li>
               <li>Sally Spingel Spugel Sporn<button>✘</button></li>
@@ -68,7 +79,7 @@
           </div>
           <div>
             <h2>Speakers </h2>
-            <ol>
+            <ol id="speaker-list-owner">
               <li>Bartholomew Cubbins<button>✘</button></li>
               <li>Benjamin Bicklebaum<button>✘</button></li>
               <li>Sally Spingel Spugel Sporn<button>✘</button></li>
@@ -107,13 +118,19 @@
           </div>
           <div>
             <h2>Application</h2>
-            <button class="btn btn-primary">Attend</button>
+            <button class="btn btn-primary" (click)="attend()">Attend</button>
             <button class="btn btn-primary">Submit Paper</button>
             <p><br>Please apply by {{conference.deadline}} .</p>
+            <div id="attend-success" class="alert alert-success" align="center">
+              <strong>You are now attending this conference.</strong>
+            </div>
+            <div id="attend-failure" class="alert alert-danger" align="center">
+              <strong>You are already attending this conference.</strong>
+            </div>
           </div>
           <div>
             <h2>Attenders</h2>
-            <ol>
+            <ol id="attender-list-user">
               <li>Bartholomew Cubbins</li>
               <li>Benjamin Bicklebaum</li>
               <li>Sally Spingel Spugel Sporn</li>
@@ -124,7 +141,7 @@
           </div>
           <div>
             <h2>Featured Speakers</h2>
-            <ol>
+            <ol id="speaker-list-user">
               <li>Bartholomew Cubbins</li>
               <li>Benjamin Bicklebaum</li>
               <li>Sally Spingel Spugel Sporn</li>
