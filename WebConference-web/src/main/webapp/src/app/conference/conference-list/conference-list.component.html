@@ -1,42 +1,63 @@
 <!DOCTYPE html>
-<html >
+<html>
 <head>
   <meta charset="utf-8">
   <title>Conference List</title>
   <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel='stylesheet prefetch'
+        href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
+  <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 </head>
+
 <body>
 <home></home>
-<!-- DON'T TALK TO ME -->
-<br><br><br><br>
-<!-- DON'T TALK TO ME -->
-<div id="result" (click)="listAll()"><h1> BEHOLD, THE <u>C O N F E R E N C E S</u> </h1></div>
-<!-- DON'T TALK TO ME -->
-<br><br><br><br>
-<!-- DON'T TALK TO ME -->
-      <table border='2px' cellspacing="10px" id="table">
-      <thead>
-        <th>Name</th>
-        <th>ID</th>
-        <th>Date</th>
-        <th>Deadline</th>
-      </thead>
 
-      <tbody class="conferences">
-        <tr *ngFor="let conference of conferences">
-          <td><b id="name">{{conference.name}}</b></td>
-          <td>{{conference.id}}</td>
-          <td>{{conference.date}}</td>
-          <td>{{conference.deadline}}</td>
-          <td><button (click)="goToConfView(conference.name)"><span>View Conference</span></button></td>
+<div class="col-md-10 col-md-offset-1" style="margin-top: 200px;">
+  <div class="panel panel-default panel-table">
+    <div class="panel-heading">
+      <div class="login-title">
+        <h1 align="center">The CONFERENCES</h1>
+      </div>
+    </div>
+    <div class="panel-body">
+      <table class="table table-striped table-bordered table-list">
+        <thead style="color:white; background-color:#ed2553">
+        <tr>
+          <th style="text-align: center !important;">Name</th>
+          <th style="text-align: center !important;">ID</th>
+          <th style="text-align: center !important;">Date</th>
+          <th style="text-align: center !important;">Deadline</th>
+          <th style="text-align: center !important;">
+            <i class="fa fa-book fa-fw" aria-hidden="true"></i>&nbsp;
+          </th>
         </tr>
-      </tbody>
+        </thead>
+        <tbody class="conferences">
+        <tr *ngFor="let conference of conferences">
+          <td style="vertical-align: middle; text-align: center"><b id="name">{{conference.name}}</b></td>
+          <td style="vertical-align: middle; text-align: center">{{conference.id}}</td>
+          <td style="vertical-align: middle; text-align: center">{{conference.date}}</td>
+          <td style="vertical-align: middle; text-align: center">{{conference.deadline}}</td>
+          <td style="vertical-align: middle; text-align: center">
+            <button class="btn btn-default" (click)="goToConfView(conference.name)"><span>View Conference</span>
+            </button>
+          </td>
+        </tr>
+        </tbody>
       </table>
+    </div>
+    <div class="panel-footer">
+      <div class="row">
+        <div class="col col-xs-4"><b>&copy; TRU916</b></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
