@@ -21,10 +21,10 @@ public class Conference extends BaseEntity<Long> {
     @Column(name = "deadline",nullable=false)
     private Date deadline;
 
-    @OneToMany(mappedBy = "paper")
+    @OneToMany(mappedBy = "paper",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private Set<Paper> papers = new HashSet<>();
 
-    @OneToMany(mappedBy = "accepted",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "accepted",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private Set<Paper> acceptedpapers = new HashSet<>();
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

@@ -30,8 +30,7 @@ public class User extends BaseEntity<Long> {
     @Column(name = "type", nullable = false)
     private String type;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name="PAPER_USER")
+    @ManyToMany(mappedBy = "owners",fetch = FetchType.EAGER)
     private Set<Paper> papers;
 
     @ManyToMany(mappedBy = "reviewers",fetch = FetchType.EAGER)

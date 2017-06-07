@@ -166,4 +166,9 @@ export class ConferenceDetailsComponent implements OnInit {
     attendanceSuccess.style.display = "none";
     attendanceFailure.style.display = "none";
   }
+
+  gotToSubmit()
+  {
+    this.router.navigateByUrl("/paperadd/" + this.conference.name);
+  }
 }

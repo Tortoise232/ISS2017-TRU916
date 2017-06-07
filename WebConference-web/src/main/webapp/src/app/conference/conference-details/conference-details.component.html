@@ -186,6 +186,15 @@
             <h1 align="center">The {{conference.name}}</h1>
             <h2> Conference Details </h2>
           </div>
+
+          <div>
+            <h2>Application</h2>
+            <button class="btn btn-primary" (click)="attend()">Attend</button>
+            <button class="btn btn-primary" (click)="gotToSubmit()">Submit Paper</button>
+            <p><br>Please apply by {{conference.deadline}} .</p>
+            <div id="attend-success" class="alert alert-success" align="center">
+              <strong>You are now attending this conference.</strong>
+
         </div>
 
         <div class="panel-body">
