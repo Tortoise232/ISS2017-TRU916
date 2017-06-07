@@ -37,5 +37,7 @@ allprojects {
         compile group: 'org.apache.logging.log4j', name: 'log4j-1.2-api', version: "$log4jVersion"
         compile group: 'org.projectlombok', name: 'lombok', version: "$lombokVersion"
         compile group: 'commons-codec', name: 'commons-codec', version: "$commonsCodecVersion"
+
+
     }
 }
