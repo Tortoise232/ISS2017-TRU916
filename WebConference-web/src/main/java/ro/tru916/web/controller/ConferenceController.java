@@ -101,6 +101,24 @@ public class ConferenceController {
         return response;
     }
 
+    @RequestMapping(value = "/conferences/{name}/remove-reviewer", method = RequestMethod.PUT)
+    public ResponseEntity removeReviewer(
+            @PathVariable final String name,
+            @RequestBody final String userName) {
+        String reviewer = userName.replaceAll("\"","");
+        log.trace("removeReviewer: name={}, reviewer={}", name, reviewer);
+        ResponseEntity response;
+        try{
+            conferenceService.removeReviewer(name, reviewer);
+            response = new ResponseEntity("success",HttpStatus.CREATED);
+            log.trace("removeReviewer success");
+        }catch(RuntimeException e){
+            response = new ResponseEntity(e.getMessage(),HttpStatus.IM_USED);
+            log.trace("removeReviewer failure");
+        }
+        return response;
+    }
+
     @RequestMapping(value = "/conferences/{name}/attend", method = RequestMethod.PUT)
     public ResponseEntity addAttender(
             @PathVariable final String name,
@@ -115,6 +133,24 @@ public class ConferenceController {
         }catch(RuntimeException e){
             response = new ResponseEntity(e.getMessage(),HttpStatus.IM_USED);
             log.trace("addAttender failure");
+        }
+        return response;
+    }
+
+    @RequestMapping(value = "/conferences/{name}/remove-attender", method = RequestMethod.PUT)
+    public ResponseEntity removeAttender(
+            @PathVariable final String name,
+            @RequestBody final String userName) {
+        String attender = userName.replaceAll("\"","");
+        log.trace("removeAttender: name={}, attender={}", name, attender);
+        ResponseEntity response;
+        try{
+            conferenceService.removeAttender(name, attender);
+            response = new ResponseEntity("success",HttpStatus.CREATED);
+            log.trace("removeAttender success");
+        }catch(RuntimeException e){
+            response = new ResponseEntity(e.getMessage(),HttpStatus.IM_USED);
+            log.trace("removeAttender failure");
         }
         return response;
     }
