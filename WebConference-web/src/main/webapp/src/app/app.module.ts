@@ -16,6 +16,8 @@ import {ConferenceService} from "./conference/shared/conference.service";
 import {AuthenticationService} from "./user/shared/authentication.service";
 import {ProfileComponent} from "./user/profile/profile.component";
 import {ConferenceDetailsComponent} from "./conference/conference-details/conference-details";
+import {PaperService} from "./paper/shared/paper.service";
+import {PaperAdd} from "./paper/paper-add/paper-add.component";
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import {ConferenceDetailsComponent} from "./conference/conference-details/confer
     HomeComponent,
     LoginComponent,
     ProfileComponent,
-    ConferenceDetailsComponent
+    ConferenceDetailsComponent,
+    PaperAdd
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,7 @@ import {ConferenceDetailsComponent} from "./conference/conference-details/confer
     HttpModule,
     AppRoutingModule
   ],
-  providers: [UserService,AuthenticationService,ConferenceService],
+  providers: [UserService,AuthenticationService,ConferenceService, PaperService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -89,6 +89,7 @@ body {
 
 .off-canvas > input[type="checkbox"] {
   display: none;
+
 }
 
 .off-canvas > input[type="checkbox"]:checked ~ .cstm-shade {
@@ -105,6 +106,7 @@ body {
   position: fixed;
   right: -300px;
   transition: right 0.5s ease;
+  z-index:100;
 }
 
 .off-canvas > input[type="checkbox"]:checked ~ .cstm-shade > .cstm-navi {

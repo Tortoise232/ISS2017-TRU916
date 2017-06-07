@@ -20,28 +20,28 @@ public class Paper extends BaseEntity<Long> {
     @Column(name = "path", nullable = false)
     private String path;
 
-    @Column(name = "eventid", nullable = false)
-    private Long eventid;
 
-    @ManyToMany(mappedBy = "papers",fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+   @JoinTable(name="PAPER_USER",joinColumns = @JoinColumn(name="paper_id",referencedColumnName = "id")
+           ,inverseJoinColumns = @JoinColumn(name="user_id",referencedColumnName = "id"))
     private Set<User> owners=new HashSet<User>();
 
-    @ManyToOne
-    @JoinTable(name="CONFERENCE_PAPER")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "conference_added_id")
     private Conference paper;
 
-    @ManyToOne
-    @JoinTable(name = "CONFERENCE_ACCEPTED_PAPERS")
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "conference_accepted_id")
     private Conference accepted;
 
     public Paper() {
     }
 
-    public Paper(String name, Float grade, String path, Long eventid) {
+    public Paper(String name, Float grade, String path,Conference conference) {
         this.name = name;
         this.grade = grade;
         this.path = path;
-        this.eventid = eventid;
+        this.paper=conference;
     }
 
     public Conference getPaper() {
@@ -92,13 +92,7 @@ public class Paper extends BaseEntity<Long> {
         this.path = path;
     }
 
-    public Long getEvetid() {
-        return eventid;
-    }
 
-    public void setEvetid(Long eventid) {
-        this.eventid = eventid;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -110,7 +104,6 @@ public class Paper extends BaseEntity<Long> {
         if (name != null ? !name.equals(paper.name) : paper.name != null) return false;
         if (grade != null ? !grade.equals(paper.grade) : paper.grade != null) return false;
         if (path != null ? !path.equals(paper.path) : paper.path != null) return false;
-        if (eventid != null ? !eventid.equals(paper.eventid) : paper.eventid != null) return false;
         return owners != null ? owners.equals(paper.owners) : paper.owners == null;
     }
 
@@ -119,7 +112,6 @@ public class Paper extends BaseEntity<Long> {
         int result = name != null ? name.hashCode() : 0;
         result = 31 * result + (grade != null ? grade.hashCode() : 0);
         result = 31 * result + (path != null ? path.hashCode() : 0);
-        result = 31 * result + (eventid != null ? eventid.hashCode() : 0);
         result = 31 * result + (owners != null ? owners.hashCode() : 0);
         return result;
     }
@@ -130,8 +122,9 @@ public class Paper extends BaseEntity<Long> {
                 "name='" + name + '\'' +
                 ", grade=" + grade +
                 ", path='" + path + '\'' +
-                ", eventid=" + eventid +
                 ", owners=" + owners +
+                ", conferencePaper=" + paper +
+                ", accepted=" + accepted +
                 '}';
     }
 }
