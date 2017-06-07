@@ -14,5 +14,7 @@ public interface ConferenceService {
     Conference findOne(String name);
     void updateConference(String oldName, String name, String date, String deadline);
     void addReviewer(String conferenceName, String userName);
+    void removeReviewer(String conferenceName, String userName);
     void addAttender(String conferenceName, String userName);
+    void removeAttender(String conferenceName, String userName);
 }
