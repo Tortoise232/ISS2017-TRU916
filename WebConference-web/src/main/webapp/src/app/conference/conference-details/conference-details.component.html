@@ -2,120 +2,191 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link rel='stylesheet prefetch'
+        href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
+  <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-  <home></home>
-  <div *ngIf="conference && (owner == currentUser)">
-    <div class="title">
-      <h1>{{conference.name}}</h1>
-      <h2>Conference Management</h2>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-          <form>
-            <div>
-              <h2>Name</h2>
-              <input type="text" value="{{conference.name}}" id="name" #name/>
+
+<home></home>
+
+
+<div *ngIf="conference && (owner == currentUser)">
+  <div class="container-fluid">
+    <div class="col-md-10 col-md-offset-1" style="margin-top: 100px;">
+      <div class="panel panel-default panel-table">
+
+        <div class="panel-heading">
+          <div class="login-title">
+            <h1 align="center">The {{conference.name}}</h1>
+            <h2>Conference Management</h2>
+          </div>
+        </div>
+
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-sm-3">
+              <div align="center">
+                <form>
+                  <div>
+                    <h4>Name</h4>
+                    <input style="width: 300px; text-align: center;" class="form-control" type="text"
+                           value="{{conference.name}}" id="name" #name/>
+                  </div>
+                  <hr>
+                  <div>
+                    <h4>Conference Date</h4>
+                    <input style="width: 300px; text-align: center;" class="form-control" value="{{conference.date}}"
+                           id="date" #date/>
+                  </div>
+                  <hr>
+                  <div>
+                    <h4>Registration Deadline</h4>
+                    <input style="width: 300px; text-align: center;" class="form-control"
+                           value="{{conference.deadline}}" id="deadline" #deadline/>
+                  </div>
+                  <hr>
+                  <button class="btn btn-primary"
+                          (click)="update(name.value,date.value,deadline.value)">Save
+                  </button>
+                  <div id="update-success" class="alert alert-success" align="center">
+                    <strong>The conference was successfully updated.</strong>
+                  </div>
+                  <div id="update-failure" class="alert alert-danger" align="center">
+                    <strong>The conference could not be updated.</strong>
+                  </div>
+                  <div id="update-required" class="alert alert-danger" align="center">
+                    <strong>All the fields are required.</strong>
+                  </div>
+                </form>
+              </div>
             </div>
-            <div>
-              <h2>Conference Date</h2>
-              <input value="{{conference.date}}" id="date" #date/>
+
+            <div class="col-sm-3">
+              <div align="center">
+                <h3>Reviewers </h3>
+                <ol id="reviewer-list-owner" class="list-group">
+                  <li class="list-group-item" style="width: 280px;">Bartholomew Cubbins
+                    <button style="float:right; margin-top: -7px;" class="btn btn-danger"><em class="fa fa-trash"></em>
+                    </button>
+                  </li>
+                  <li class="list-group-item" style="width: 280px;">Benjamin Bicklebaum
+                    <button style="float:right; margin-top: -7px;" class="btn btn-danger"><em class="fa fa-trash"></em>
+                    </button>
+                  </li>
+                  <li class="list-group-item" style="width: 280px;">Sally Spingel Spugel Sporn
+                    <button style="float:right; margin-top: -7px;" class="btn btn-danger"><em class="fa fa-trash"></em>
+                    </button>
+                  </li>
+                  <li *ngFor="let reviewer of reviewers" class="list-group-item">
+                    {{reviewer.name}}
+                    <button class="btn btn-danger"><em class="fa fa-trash"></em>
+                    </button>
+                  </li>
+                </ol>
+
+                <div align="center">
+                  <div align="center">
+                    <form>
+                      <div class="form-group">
+                        <input style="width: 300px; text-align: center;"
+                               class="form-control" placeholder="Username" type="text" id="reviewer" #reviewer/>
+                        <button style="margin-top: 10px" class="btn btn-primary" (click)="addReviewer(reviewer.value)">
+                          Add
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                  <div id="add-reviewer-success" class="alert alert-success" align="center">
+                    <strong>The reviewer was successfully added to the list.</strong>
+                  </div>
+                  <div id="add-reviewer-failure" class="alert alert-danger" align="center">
+                    <strong>This reviewer could not be added to the list.</strong>
+                  </div>
+                  <div id="add-reviewer-required" class="alert alert-danger" align="center">
+                    <strong>You must specify the reviewer's username.</strong>
+                  </div>
+                </div>
+              </div>            
             </div>
-            <div>
-              <h2>Registration Deadline</h2>
-              <input value="{{conference.deadline}}" id="deadline" #deadline/>
+
+            <div class="col-sm-3">
+              <div align="center">
+                <h3>Attenders</h3>
+                <ol id="attender-list-user" class="list-group">
+                  <li class="list-group-item" style="width: 280px;">Bartholomew Cubbins
+                    <button style="float:right; margin-top: -7px;" class="btn btn-danger"><em class="fa fa-trash"></em>
+                    </button>
+                  </li>
+                  <li class="list-group-item" style="width: 280px;">Benjamin Bicklebaum
+                    <button style="float:right; margin-top: -7px;" class="btn btn-danger"><em class="fa fa-trash"></em>
+                    </button>
+                  </li>
+                  <li class="list-group-item" style="width: 280px;">Sally Spingel Spugel Sporn
+                    <button style="float:right; margin-top: -7px;" class="btn btn-danger"><em class="fa fa-trash"></em>
+                    </button>
+                  </li>
+                  <li *ngFor="let attender of attenders" class="list-group-item" style="width: 280px;">
+                    {{attender.name}}
+                    <button style="float:right; margin-top: -7px;" class="btn btn-danger"><em class="fa fa-trash"></em>
+                    </button>
+                  </li>
+                </ol>
+              </div>
             </div>
-            <button class="btn btn-primary" (click)="update(name.value,date.value,deadline.value)">Save</button>
-            <div id="update-success" class="alert alert-success" align="center">
-              <strong>The conference was successfully updated.</strong>
-            </div>
-            <div id="update-failure" class="alert alert-danger" align="center">
-              <strong>The conference could not be updated.</strong>
-            </div>
-            <div id="update-required" class="alert alert-danger" align="center">
-              <strong>All the fields are required.</strong>
-            </div>
-          </form>
-          <div>
-            <h2>Reviewers </h2>
-            <ol id="reviewer-list-owner">
-              <li>Bartholomew Cubbins<button>✘</button></li>
-              <li>Benjamin Bicklebaum<button>✘</button></li>
-              <li>Sally Spingel Spugel Sporn<button>✘</button></li>
-              <li *ngFor="let reviewer of reviewers">
-                {{reviewer.name}}
-                <button>✘</button>
-              </li>
-            </ol>
-            <form>
-              <input placeholder="Username" type="text" id="reviewer" #reviewer/>
-              <button class="btn btn-primary" (click)="addReviewer(reviewer.value)">Add</button>
-            </form>
-            <div id="add-reviewer-success" class="alert alert-success" align="center">
-              <strong>The reviewer was successfully added to the list.</strong>
-            </div>
-            <div id="add-reviewer-failure" class="alert alert-danger" align="center">
-              <strong>This reviewer could not be added to the list.</strong>
-            </div>
-            <div id="add-reviewer-required" class="alert alert-danger" align="center">
-              <strong>You must specify the reviewer's username.</strong>
+
+            <div class="col-sm-3">
+              <div align="center">
+                <h3>Speakers</h3>
+                <ol id="speaker-list-user" class="list-group">
+                  <li class="list-group-item" style="width: 280px;">Bartholomew Cubbins
+                    <button style="float:right; margin-top: -7px;" class="btn btn-danger"><em class="fa fa-trash"></em>
+                    </button>
+                  </li>
+                  <li class="list-group-item" style="width: 280px;">Benjamin Bicklebaum
+                    <button style="float:right; margin-top: -7px;" class="btn btn-danger"><em class="fa fa-trash"></em>
+                    </button>
+                  </li>
+                  <li class="list-group-item" style="width: 280px;">Sally Spingel Spugel Sporn
+                    <button style="float:right; margin-top: -7px;" class="btn btn-danger"><em class="fa fa-trash"></em>
+                    </button>
+                  </li>
+                  <li *ngFor="let speaker of speakers" class="list-group-item" style="width: 280px;">
+                    {{speaker.name}}
+                    <button style="float:right; margin-top: -7px;" class="btn btn-danger"><em class="fa fa-trash"></em>
+                    </button>
+                  </li>
+                </ol>
+              </div>
             </div>
           </div>
-          <div>
-            <h2>Attenders </h2>
-            <ol id="attender-list-owner">
-              <li>Bartholomew Cubbins<button>✘</button></li>
-              <li>Benjamin Bicklebaum<button>✘</button></li>
-              <li>Sally Spingel Spugel Sporn<button>✘</button></li>
-              <li *ngFor="let attender of attenders">
-                {{attender.name}}
-                <button>✘</button>
-              </li>
-            </ol>
-          </div>
-          <div>
-            <h2>Speakers </h2>
-            <ol id="speaker-list-owner">
-              <li>Bartholomew Cubbins<button>✘</button></li>
-              <li>Benjamin Bicklebaum<button>✘</button></li>
-              <li>Sally Spingel Spugel Sporn<button>✘</button></li>
-              <li *ngFor="let speaker of speakers">
-                {{speaker.name}}
-                <button>✘</button>
-              </li>
-            </ol>
+        </div>
+        <div class="panel-footer">
+          <div class="row">
+            <div class="col col-xs-4"><b>&copy; TRU916</b></div>
+
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 
-  <div *ngIf="conference && (owner != currentUser)">
-    <div class="title">
-      <h1>{{conference.name}}</h1>
-      <h2> Conference Details </h2>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-          <div>
-            <h2>General conference information</h2>
-            <p>
-              The conference will take place on {{conference.date}}.
-              <br>
-              All conference sessions are hosted in the Auditorium Maximum at The Babeș-Bolyai University in Cluj-Napoca, Cluj County, Romania.
-              <br>
-              If you have any questions, please contact {{conference.ownerUsername}} via email at dr-seuss@ubb.edu or by phone at 505-505-505.
-            </p>
+<div *ngIf="conference && (owner != currentUser)">
+
+  <div class="container-fluid">
+    <div class="col-md-6 col-md-offset-3" style="margin-top: 100px;">
+      <div class="panel panel-default panel-table">
+        <div class="panel-heading">
+          <div class="login-title">
+            <h1 align="center">The {{conference.name}}</h1>
+            <h2> Conference Details </h2>
           </div>
-          <div>
-            <h2>Organizer</h2>
-            <i>{{conference.ownerUsername}}</i>
-          </div>
+
           <div>
             <h2>Application</h2>
             <button class="btn btn-primary" (click)="attend()">Attend</button>
@@ -123,36 +194,83 @@
             <p><br>Please apply by {{conference.deadline}} .</p>
             <div id="attend-success" class="alert alert-success" align="center">
               <strong>You are now attending this conference.</strong>
+
+        </div>
+
+        <div class="panel-body">
+          <div class="col-md-12">
+            <div align="center">
+              <h3>General conference information</h3>
+              <div>
+                The conference will take place on <b> {{conference.date}} </b>.
+                <br>
+                All conference sessions are hosted in the <b> Auditorium Maximum </b> at The Babeș-Bolyai University in
+                Cluj-Napoca, Cluj County, Romania.
+                <br>
+                If you have any questions, please <b> contact {{conference.ownerUsername}} </b> via email at
+                dr-seuss@ubb.edu or by phone at 505-505-505.
+              </div>
             </div>
-            <div id="attend-failure" class="alert alert-danger" align="center">
-              <strong>You are already attending this conference.</strong>
+            <hr>
+            <div align="center">
+              <h3>Organizer</h3>
+              <mark><i>{{conference.ownerUsername}}</i></mark>
             </div>
+            <hr>
+            <div align="center">
+              <h3>Application</h3>
+              <button class="btn btn-primary" (click)="attend()">Attend</button>
+              <button class="btn btn-primary">Submit Paper</button>
+              <p><br>Please apply by {{conference.deadline}} .</p>
+              <div id="attend-success" class="alert alert-success" align="center">
+                <strong>You are now attending this conference.</strong>
+              </div>
+              <div id="attend-failure" class="alert alert-danger" align="center">
+                <strong>You are already attending this conference.</strong>
+              </div>
+            </div>
+            <hr>
+
+            <div class="row">
+              <div class="col-sm-6">
+                <div align="center">
+                  <h3>Attenders</h3>
+                  <ol id="attender-list-user" class="list-group">
+                    <li class="list-group-item" style="width: 280px;">Bartholomew Cubbins</li>
+                    <li class="list-group-item" style="width: 280px;">Benjamin Bicklebaum</li>
+                    <li class="list-group-item" style="width: 280px;">Sally Spingel Spugel Sporn</li>
+                    <li *ngFor="let attender of attenders" class="list-group-item" style="width: 280px;">
+                      {{attender.name}}
+                    </li>
+                  </ol>
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div align="center">
+                  <h3>Featured Speakers</h3>
+                  <ol id="speaker-list-user">
+                    <li class="list-group-item" style="width: 280px;">Bartholomew Cubbins</li>
+                    <li class="list-group-item" style="width: 280px;">Benjamin Bicklebaum</li>
+                    <li class="list-group-item" style="width: 280px;">Sally Spingel Spugel Sporn</li>
+                    <li *ngFor="let speaker of speakers" class="list-group-item" style="width: 280px;">
+                      {{speaker.name}}
+                    </li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+
           </div>
-          <div>
-            <h2>Attenders</h2>
-            <ol id="attender-list-user">
-              <li>Bartholomew Cubbins</li>
-              <li>Benjamin Bicklebaum</li>
-              <li>Sally Spingel Spugel Sporn</li>
-              <li *ngFor="let attender of attenders">
-                {{attender.name}}
-              </li>
-            </ol>
-          </div>
-          <div>
-            <h2>Featured Speakers</h2>
-            <ol id="speaker-list-user">
-              <li>Bartholomew Cubbins</li>
-              <li>Benjamin Bicklebaum</li>
-              <li>Sally Spingel Spugel Sporn</li>
-              <li *ngFor="let speaker of speakers">
-                {{speaker.name}}
-              </li>
-            </ol>
+        </div>
+        <div class="panel-footer">
+          <div class="row">
+            <div class="col col-xs-4"><b>&copy; TRU916</b></div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 </body>
 </html>

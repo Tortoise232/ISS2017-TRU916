@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ro.tru916.core.model.User;
 import ro.tru916.core.repository.UserRepository;
+import ro.tru916.core.util.EmailSender;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Calendar;
@@ -38,6 +39,7 @@ public class UserServiceImpl implements UserService {
         User user = new User(name, decodedPassword, username, registerdate, email, type);
         try {
             userRepository.save(user);
+            EmailSender.userRegistrationSuccess(user);
         }catch(ConstraintViolationException e){
             throw new RuntimeException("Username must be unique.");
 
