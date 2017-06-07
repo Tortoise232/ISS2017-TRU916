@@ -30,6 +30,7 @@
               <input value="{{conference.deadline}}" id="deadline" #deadline/>
             </div>
             <button class="btn btn-primary" (click)="update(name.value,date.value,deadline.value)">Save</button>
+            <button class="btn btn-primary" (click)="update(name.value,date.value,deadline.value)">View Papers</button>
             <div id="update-success" class="alert alert-success" align="center">
               <strong>The conference was successfully updated.</strong>
             </div>
@@ -43,12 +44,9 @@
           <div>
             <h2>Reviewers </h2>
             <ol id="reviewer-list-owner">
-              <li>Bartholomew Cubbins<button>✘</button></li>
-              <li>Benjamin Bicklebaum<button>✘</button></li>
-              <li>Sally Spingel Spugel Sporn<button>✘</button></li>
               <li *ngFor="let reviewer of reviewers">
                 {{reviewer.name}}
-                <button>✘</button>
+                <button (click)='removeReviewer(conference.name,reviewer.name)'>✘</button>
               </li>
             </ol>
             <form>
@@ -68,12 +66,9 @@
           <div>
             <h2>Attenders </h2>
             <ol id="attender-list-owner">
-              <li>Bartholomew Cubbins<button>✘</button></li>
-              <li>Benjamin Bicklebaum<button>✘</button></li>
-              <li>Sally Spingel Spugel Sporn<button>✘</button></li>
               <li *ngFor="let attender of attenders">
                 {{attender.name}}
-                <button>✘</button>
+                <button (click)='removeAttender(conference.name,attender.name)'>✘</button>
               </li>
             </ol>
           </div>

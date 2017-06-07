@@ -9,6 +9,7 @@ import ro.tru916.core.model.Conference;
 import ro.tru916.core.model.User;
 import ro.tru916.core.repository.ConferenceRepository;
 import ro.tru916.core.repository.UserRepository;
+import ro.tru916.core.util.EmailSender;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -44,6 +45,7 @@ public class ConferenceServiceImpl implements ConferenceService {
             Conference conference = new Conference(name, confDate,confDeadline,confOwner);
             try {
                 conferenceRepository.saveAndFlush(conference);
+                EmailSender.conferenceRegistrationSuccess(confOwner,conference);
             }
             catch(Exception e)
             {
@@ -118,8 +120,22 @@ public class ConferenceServiceImpl implements ConferenceService {
         if(reviewers.contains(user))
             throw new RuntimeException("The user is already a reviewer!");
         reviewers.add(user);
+        EmailSender.conferenceReviewing(user, conference);
         conference.setReviewers(reviewers);
         log.trace("addReviewer end: conference={}", conference);
+    }
+
+    @Override
+    @Transactional
+    public void removeReviewer(String conferenceName, String userName) {
+        log.trace("removeReviewer begin: conferenceName={}, userName={}", conferenceName, userName);
+        Conference conference = findOne(conferenceName);
+        User user = findUser(userName);
+        Set<User> reviewers = conference.getReviewers();
+        reviewers.remove(user);
+        conference.setReviewers(reviewers);
+
+        log.trace("removeReviewer: conference={}", conference);
     }
 
     @Override
@@ -132,7 +148,20 @@ public class ConferenceServiceImpl implements ConferenceService {
         if(attenders.contains(user))
             throw new RuntimeException("The user is already an attender!");
         attenders.add(user);
+        EmailSender.conferenceAttending(user,conference);
         conference.setAttendanceUsers(attenders);
         log.trace("addAttender: conference={}", conference);
+    }
+
+    @Override
+    @Transactional
+    public void removeAttender(String conferenceName, String userName) {
+        log.trace("removeAttender begin: conferenceName={}, userName={}", conferenceName, userName);
+        Conference conference = findOne(conferenceName);
+        User user = findUser(userName);
+        Set<User> attenders = conference.getAttendanceUsers();
+        attenders.remove(user);
+        conference.setAttendanceUsers(attenders);
+        log.trace("removeAttender end: conference={}", conference);
     }
 }

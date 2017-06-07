@@ -1,5 +1,8 @@
 package ro.tru916.core.util;
 
+import ro.tru916.core.model.Conference;
+import ro.tru916.core.model.User;
+
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -17,7 +20,8 @@ public class EmailSender {
         String password = "WebConferenceISS";
         String host = "smtp.gmail.com";
         Properties props = System.getProperties();
-        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        //props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.host", host);
         props.put("mail.smtp.user", from);
         props.put("mail.smtp.password", password);
@@ -46,4 +50,75 @@ public class EmailSender {
         }
         return false;
     }
+
+    public static void userRegistrationSuccess(User user){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String[] to = {user.getEmail()};
+                    EmailSender.SendMail("Welcome to WebConference "
+                            + user.getName() + ", your account has been created with username "+user.getUsername()+" !", to);
+                    System.out.println("Success, email sent to "+user.getUsername());
+                }
+                catch(Exception e) {
+                    System.err.println("Error at sending email to "+user.getUsername());
+                }
+            }
+        }).start();
+    }
+
+    public static void conferenceRegistrationSuccess(User user, Conference newConf){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String[] to = {user.getEmail()};
+                    EmailSender.SendMail("Congratulations on organizing your first conference"
+                            + user.getName() + ",  see the details of " + newConf.getName()+" at http://localhost:4200/conferences/" + newConf.getName(), to);
+                    System.out.println("Success, email sent to "+user.getUsername());
+                }
+                catch(Exception e) {
+                    System.err.println("Error at sending email to "+user.getUsername());
+                }
+            }
+        }).start();
+    }
+
+    public static void conferenceAttending(User user, Conference conf){
+        new Thread(new Runnable() {
+        @Override
+        public void run() {
+            try {
+                String[] to = {user.getEmail()};
+                EmailSender.SendMail("Hello "
+                        + user.getName() + ",  we're glad you're attending " + conf.getName() +
+                        "! See more details at http://localhost:4200/conferences/" + conf.getName(), to);
+                System.out.println("Success, email sent to "+user.getUsername());
+            }
+            catch(Exception e) {
+                System.err.println("Error at sending email to "+user.getUsername());
+            }
+        }
+    }).start();
+    }
+
+    public static void conferenceReviewing(User user, Conference conf){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String[] to = {user.getEmail()};
+                    EmailSender.SendMail("Hello "
+                            + user.getName() + ",  you've been assigned by " + conf.getOwner().getName() +
+                            " on the reviewing board for conference " + conf.getName() + "! See more details at http://localhost:4200/conferences/" + conf.getName(), to);
+                    System.out.println("Success, email sent to "+user.getUsername());
+                }
+                catch(Exception e) {
+                    System.err.println("Error at sending email to "+user.getUsername());
+                }
+            }
+        }).start();
+    }
+
 }

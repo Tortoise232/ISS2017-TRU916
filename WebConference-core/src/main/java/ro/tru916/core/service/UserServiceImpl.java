@@ -39,20 +39,7 @@ public class UserServiceImpl implements UserService {
         User user = new User(name, decodedPassword, username, registerdate, email, type);
         try {
             userRepository.save(user);
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        String[] to = {user.getEmail()};
-                        EmailSender.SendMail("Welcome to WebConference "
-                                + user.getName() + ", your account has been created with username "+user.getUsername()+" !", to);
-                        System.out.println("Succes, email sent to "+user.getUsername());
-                    }
-                    catch(Exception e) {
-                        System.err.println("Error at sending email to "+user.getUsername());
-                    }
-                }
-            }).start();
+            EmailSender.userRegistrationSuccess(user);
         }catch(ConstraintViolationException e){
             throw new RuntimeException("Username must be unique.");
 

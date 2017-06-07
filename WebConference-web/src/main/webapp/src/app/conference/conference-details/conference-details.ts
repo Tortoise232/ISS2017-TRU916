@@ -118,6 +118,17 @@ export class ConferenceDetailsComponent implements OnInit {
     }
   }
 
+  removeAttender(conferenceName: string, userName: string){
+    console.log("trying to remove" + userName + " " + conferenceName);
+    this.conferenceService.removeAttender(conferenceName,userName);
+    console.log("done removing him");
+  }
+
+  removeReviewer(conferenceName: string, userName:string){
+    this.conferenceService.removeReviewer(conferenceName, userName);
+
+  }
+
   showAttendanceStatus(status: number): void{
     if (status == 201) {
       let success = document.getElementById("attend-success");
