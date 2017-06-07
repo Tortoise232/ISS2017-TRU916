@@ -20,8 +20,8 @@ public class EmailSender {
         String password = "WebConferenceISS";
         String host = "smtp.gmail.com";
         Properties props = System.getProperties();
-        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-        //props.put("mail.smtp.starttls.enable", "true");
+//        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.host", host);
         props.put("mail.smtp.user", from);
         props.put("mail.smtp.password", password);

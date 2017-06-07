@@ -50,6 +50,11 @@ export class PaperAdd implements OnInit{
     }
 
   add(name, path) {
+    if(name === "" || path === "" )
+    {
+      alert("All fields are mandatory!!");
+      return;
+    }
     this.route.params
       .switchMap((params: Params) => this.conferenceName=params['name']).subscribe(_=>{});
     // console.log(this.conferenceName);
