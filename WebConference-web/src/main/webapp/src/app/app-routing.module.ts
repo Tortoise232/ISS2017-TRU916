@@ -9,6 +9,8 @@ import {ProfileComponent} from "./user/profile/profile.component";
 import {ConferenceDetailsComponent} from "./conference/conference-details/conference-details";
 import {ListConferenceComponent} from "./conference/conference-list/conference-list.component";
 import {PaperAdd} from "./paper/paper-add/paper-add.component";
+import {ListPaperComponent} from "./paper/paper-list/paper-list.component";
+
 const routes: Routes = [
     { path: 'home', component: HomeComponent},
     { path: 'login', component: LoginComponent},
@@ -21,7 +23,8 @@ const routes: Routes = [
     { path: 'conferences/:name/remove-attender', component: ConferenceDetailsComponent},
     { path: 'listconf', component: ListConferenceComponent},
     { path: 'profile', component: ProfileComponent},
-    {path:'paperadd/:name',component:PaperAdd},
+    { path: 'paperadd/:name',component:PaperAdd},
+    { path: 'listpapers/:name',component:ListPaperComponent},
 ];
 @NgModule({
     imports: [ RouterModule.forRoot(routes) ],

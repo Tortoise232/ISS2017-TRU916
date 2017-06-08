@@ -4,8 +4,9 @@
 export class Paper
 {
   name:string;
-  userId:number;
+  user:string;
   rating:number;
   path:string;
-  conferenceId:number;
+  conference:string;
+  status:string;
 }
