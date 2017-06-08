@@ -50,3 +50,8 @@ body {
 #attend-success, #attend-failure{
   display: none;
 }
+
+#upload-success
+{
+  display: none;
+}

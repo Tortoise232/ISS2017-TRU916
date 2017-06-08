@@ -184,6 +184,7 @@
     <div class="modal-dialog">
 
       <!-- Modal content-->
+
       <!--<form action="addRow.jsp">-->
       <form>
 
@@ -196,16 +197,19 @@
             <div class="form-group">
               <label for="nameADD">Name</label>
               <input name="nameADD" class="form-control input-lg" id="nameADD" type="text"
-                     placeholder="File name" autocomplete="off" style="text-align:center">
+                     placeholder="File name" autocomplete="off" style="text-align:center" #nameadd>
             </div>
             <div class="form-group">
               <label for="pathADD">Path</label>
               <input name="pathADD" class="form-control input-lg" id="pathADD" type="text"
-                     placeholder="Path link" autocomplete="off" style="text-align:center">
+                     placeholder="Path link" autocomplete="off" style="text-align:center" #pathadd>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-default">Upload</button>
+            <button (click)="addpaper(nameadd.value,pathadd.value)" class="btn btn-default">Upload</button>
+          </div>
+          <div id="upload-success" class="alert alert-success" align="center">
+            <strong>Upload Successfull!</strong>
           </div>
         </div>
       </form>
