@@ -176,6 +176,48 @@
   </div>
 </div>
 
+
+<div class="container">
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+
+      <!--<form action="addRow.jsp">-->
+      <form>
+
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Add new paper</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="nameADD">Name</label>
+              <input name="nameADD" class="form-control input-lg" id="nameADD" type="text"
+                     placeholder="File name" autocomplete="off" style="text-align:center" #nameadd>
+            </div>
+            <div class="form-group">
+              <label for="pathADD">Path</label>
+              <input name="pathADD" class="form-control input-lg" id="pathADD" type="text"
+                     placeholder="Path link" autocomplete="off" style="text-align:center" #pathadd>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button (click)="addpaper(nameadd.value,pathadd.value)" class="btn btn-default">Upload</button>
+          </div>
+          <div id="upload-success" class="alert alert-success" align="center">
+            <strong>Upload Successfull!</strong>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
 <div *ngIf="conference && (owner != currentUser)">
 
   <div class="container-fluid">
@@ -186,91 +228,86 @@
             <h1 align="center">The {{conference.name}}</h1>
             <h2> Conference Details </h2>
           </div>
-
-          <div>
-            <h2>Application</h2>
-            <button class="btn btn-primary" (click)="attend()">Attend</button>
-            <button class="btn btn-primary" (click)="gotToSubmit()" >Submit Paper</button>
-            <p><br>Please apply by {{conference.deadline}} .</p>
-            <div id="attend-success" class="alert alert-success" align="center">
-              <strong>You are now attending this conference.</strong>
-
         </div>
+        <div>
+          <div class="panel-body">
+            <div class="col-md-12">
+              <div align="center">
+                <h3>General conference information</h3>
+                <div>
+                  The conference will take place on <b> {{conference.date}} </b>.
+                  <br>
+                  All conference sessions are hosted in the <b> Auditorium Maximum </b> at The Babeș-Bolyai University
+                  in
+                  Cluj-Napoca, Cluj County, Romania.
+                  <br>
+                  If you have any questions, please <b> contact {{conference.ownerUsername}} </b> via email at
+                  dr-seuss@ubb.edu or by phone at 505-505-505.
+                </div>
+              </div>
+              <hr>
+              <div align="center">
+                <h3>Organizer</h3>
+                <mark><i>{{conference.ownerUsername}}</i></mark>
+              </div>
+              <hr>
+              <div align="center">
+                <h3>Application</h3>
+                <button class="btn btn-primary" (click)="attend()">Attend</button>
+                <!--<button class="btn btn-primary" (click)="gotToSubmit()">Submit Paper</button>-->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Submit Paper
+                </button>
 
-        <div class="panel-body">
-          <div class="col-md-12">
-            <div align="center">
-              <h3>General conference information</h3>
-              <div>
-                The conference will take place on <b> {{conference.date}} </b>.
-                <br>
-                All conference sessions are hosted in the <b> Auditorium Maximum </b> at The Babeș-Bolyai University in
-                Cluj-Napoca, Cluj County, Romania.
-                <br>
-                If you have any questions, please <b> contact {{conference.ownerUsername}} </b> via email at
-                dr-seuss@ubb.edu or by phone at 505-505-505.
+                <p><br>Please apply by {{conference.deadline}} .</p>
+                <div id="attend-success" class="alert alert-success" align="center">
+                  <strong>You are now attending this conference.</strong>
+                </div>
+                <div id="attend-failure" class="alert alert-danger" align="center">
+                  <strong>You are already attending this conference.</strong>
+                </div>
               </div>
-            </div>
-            <hr>
-            <div align="center">
-              <h3>Organizer</h3>
-              <mark><i>{{conference.ownerUsername}}</i></mark>
-            </div>
-            <hr>
-            <div align="center">
-              <h3>Application</h3>
-              <button class="btn btn-primary" (click)="attend()">Attend</button>
-              <button class="btn btn-primary" (click)="gotToSubmit()">Submit Paper</button>
-              <p><br>Please apply by {{conference.deadline}} .</p>
-              <div id="attend-success" class="alert alert-success" align="center">
-                <strong>You are now attending this conference.</strong>
-              </div>
-              <div id="attend-failure" class="alert alert-danger" align="center">
-                <strong>You are already attending this conference.</strong>
-              </div>
-            </div>
-            <hr>
+              <hr>
 
+              <div class="row">
+                <div class="col-sm-6">
+                  <div align="center">
+                    <h3>Attenders</h3>
+                    <ol id="attender-list-user" class="list-group">
+                      <li class="list-group-item" style="width: 280px;">Bartholomew Cubbins</li>
+                      <li class="list-group-item" style="width: 280px;">Benjamin Bicklebaum</li>
+                      <li class="list-group-item" style="width: 280px;">Sally Spingel Spugel Sporn</li>
+                      <li *ngFor="let attender of attenders" class="list-group-item" style="width: 280px;">
+                        {{attender.name}}
+                      </li>
+                    </ol>
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div align="center">
+                    <h3>Featured Speakers</h3>
+                    <ol id="speaker-list-user">
+                      <li class="list-group-item" style="width: 280px;">Bartholomew Cubbins</li>
+                      <li class="list-group-item" style="width: 280px;">Benjamin Bicklebaum</li>
+                      <li class="list-group-item" style="width: 280px;">Sally Spingel Spugel Sporn</li>
+                      <li *ngFor="let speaker of speakers" class="list-group-item" style="width: 280px;">
+                        {{speaker.name}}
+                      </li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="panel-footer">
             <div class="row">
-              <div class="col-sm-6">
-                <div align="center">
-                  <h3>Attenders</h3>
-                  <ol id="attender-list-user" class="list-group">
-                    <li class="list-group-item" style="width: 280px;">Bartholomew Cubbins</li>
-                    <li class="list-group-item" style="width: 280px;">Benjamin Bicklebaum</li>
-                    <li class="list-group-item" style="width: 280px;">Sally Spingel Spugel Sporn</li>
-                    <li *ngFor="let attender of attenders" class="list-group-item" style="width: 280px;">
-                      {{attender.name}}
-                    </li>
-                  </ol>
-                </div>
-              </div>
-
-              <div class="col-sm-6">
-                <div align="center">
-                  <h3>Featured Speakers</h3>
-                  <ol id="speaker-list-user">
-                    <li class="list-group-item" style="width: 280px;">Bartholomew Cubbins</li>
-                    <li class="list-group-item" style="width: 280px;">Benjamin Bicklebaum</li>
-                    <li class="list-group-item" style="width: 280px;">Sally Spingel Spugel Sporn</li>
-                    <li *ngFor="let speaker of speakers" class="list-group-item" style="width: 280px;">
-                      {{speaker.name}}
-                    </li>
-                  </ol>
-                </div>
-              </div>
+              <div class="col col-xs-4"><b>&copy; TRU916</b></div>
             </div>
+          </div>
+        </div>
 
-          </div>
-        </div>
-        <div class="panel-footer">
-          <div class="row">
-            <div class="col col-xs-4"><b>&copy; TRU916</b></div>
-          </div>
-        </div>
       </div>
-    </div>
-  </div>
     </div>
   </div>
 </div>

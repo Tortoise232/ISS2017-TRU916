@@ -22,7 +22,7 @@ export class AuthenticationService {
     console.log(status);
     if (status == 200){
       localStorage.setItem("user", username);
-      this.router.navigate(['home']);
+      this.router.navigate(['welcomepage']);
     }
     if (status == 401) {
     }
