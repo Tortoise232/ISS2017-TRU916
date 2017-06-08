@@ -171,4 +171,7 @@ export class ConferenceDetailsComponent implements OnInit {
   {
     this.router.navigateByUrl("/paperadd/" + this.conference.name);
   }
+  goToPapers(){
+    this.router.navigateByUrl("/listpapers/"+this.conference.name);
+  }
 }
