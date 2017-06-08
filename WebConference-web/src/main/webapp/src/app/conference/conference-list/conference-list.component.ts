@@ -22,7 +22,7 @@ export class ListConferenceComponent implements  OnInit{
   conferences: Conference[];
   constructor(private conferenceService: ConferenceService,
               private location: Location,
-              private router: Router,) {
+              private router: Router) {
   }
 
   ngOnInit(): void {

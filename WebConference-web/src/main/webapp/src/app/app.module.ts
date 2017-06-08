@@ -18,6 +18,7 @@ import {ProfileComponent} from "./user/profile/profile.component";
 import {ConferenceDetailsComponent} from "./conference/conference-details/conference-details";
 import {PaperService} from "./paper/shared/paper.service";
 import {PaperAdd} from "./paper/paper-add/paper-add.component";
+import {WelcomePageComponent} from "./welcomepage/welcomepage.component";
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {PaperAdd} from "./paper/paper-add/paper-add.component";
     LoginComponent,
     ProfileComponent,
     ConferenceDetailsComponent,
-    PaperAdd
+    PaperAdd,
+    WelcomePageComponent
   ],
   imports: [
     BrowserModule,

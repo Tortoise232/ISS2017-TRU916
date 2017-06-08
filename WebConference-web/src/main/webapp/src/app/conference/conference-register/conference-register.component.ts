@@ -37,7 +37,7 @@ export class RegisterConferenceComponent {
       // form.style.display = "none";
       success.style.display = "block";
       setTimeout(() => {
-          this.router.navigate(['/home']);
+          this.router.navigate(['/welcomepage']);
         },
         2000);
 
