@@ -47,6 +47,11 @@ body {
   display: none;
 }
 
-#attend-success1, #attend-failure{
+#attend-success, #attend-failure{
+  display: none;
+}
+
+#upload-success
+{
   display: none;
 }

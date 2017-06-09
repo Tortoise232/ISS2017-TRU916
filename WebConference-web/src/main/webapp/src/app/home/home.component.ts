@@ -1,6 +1,8 @@
-import {Component} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {AuthenticationService} from "../user/shared/authentication.service";
+import {Conference} from "../conference/shared/conference.model";
+import {ConferenceService} from "../conference/shared/conference.service";
 
 @Component({
   selector: 'home',
@@ -8,20 +10,38 @@ import {AuthenticationService} from "../user/shared/authentication.service";
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
-
+export class HomeComponent implements  OnInit{
+  conferences: Conference[];
   // private current:string ="/";
   // private acti:string="bhome";
-  constructor(private router: Router,
+  private currentUser:string;
+
+
+  constructor(private conferenceService : ConferenceService,
+              private router: Router,
               private authenticationService: AuthenticationService) {
   }
 
   ngOnInit() {
     this.authenticationService.checkCredentials();
+    this.currentUser = localStorage.getItem("user");
+    this.listAll();
   }
 
   logout() {
     this.authenticationService.logout();
+  }
+
+  listAll(){
+    this.conferenceService.findAll().subscribe(conferences=>this.conferences=conferences);
+  }
+
+  goToConfView(name){
+    this.router.navigateByUrl("/conferences/" + name);
+  }
+
+  goToPaperView(){
+    this.router.navigateByUrl("/listpapersforuser/" + this.currentUser);
   }
 
   // loadPage(data:string) {

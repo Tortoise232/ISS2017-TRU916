@@ -14,5 +14,7 @@ public interface PaperService {
 
     List<Paper> findAllFromConference(String conferenceName);
 
+    List<Paper> findAllByUser(String userName);
+
     void changePaperStatus(String paperName);
 }

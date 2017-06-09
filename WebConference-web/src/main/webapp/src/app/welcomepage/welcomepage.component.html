@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Home Page</title>
+  <link rel='stylesheet prefetch'
+        href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
+  <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css"
+        integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+</head>
+<body>
+
+<home></home>
+
+<div *ngIf="user" style="margin-top: 70px;" align="center">
+    <!--<h1 id="titleWelcomePage">Welcome {{user.name}}</h1>-->
+    <h1 class="retroshadow">Welcome {{user.name}}</h1>
+</div>
+
+<div align="center">
+  <div *ngFor="let conference of conferences">
+    <div class="col-md-3 panel">
+      <div class="card" style="width: 20rem;">
+        <div class="card-header text-center">
+          Featured conference
+        </div>
+        <div class="card-body">
+          <img class="card-img-top" width="318px" height="180px"
+               src="http://connectingmichigan.net/wp-content/uploads/2015/09/Conferences.jpg" alt="Card image cap">
+          <div class="card-block">
+            <h4 class="card-title text-center">{{conference.name}}</h4>
+            <p class="card-text">
+              Some quick example text to build on the card title and make up the bulk of the card's
+              content.
+            </p>
+            <div>
+              <h6>Date
+                <mark><i>{{conference.date}}</i></mark>
+              </h6>
+              <hr>
+              <h6>Deadline
+                <mark><i>{{conference.deadline}}</i></mark>
+              </h6>
+            </div>
+          </div>
+          <div class="card-footer text-center">
+            <button class="btn btn-primary" (click)="goToConfView(conference.name)"><span>View Conference</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+

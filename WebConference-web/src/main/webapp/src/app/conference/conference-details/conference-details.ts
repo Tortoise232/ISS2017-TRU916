@@ -8,6 +8,8 @@ import 'rxjs/add/operator/switchMap';
 import {Conference} from "../shared/conference.model";
 import {ConferenceService} from "../shared/conference.service";
 import {User} from "../../user/shared/user.model";
+import {PaperService} from "../../paper/shared/paper.service";
+import {AuthenticationService} from "../../user/shared/authentication.service";
 
 @Component({
   selector: 'conference-details',
@@ -27,10 +29,11 @@ export class ConferenceDetailsComponent implements OnInit {
 
   constructor(private conferenceService: ConferenceService,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,private paperService:PaperService,private userAuth:AuthenticationService) {
   }
 
   ngOnInit(): void{
+    this.userAuth.checkCredentials();
     this.getConference();
     this.currentUser = localStorage.getItem("user");
   }
@@ -49,6 +52,7 @@ export class ConferenceDetailsComponent implements OnInit {
   }
 
   update(name, date, deadline): void {
+    this.userAuth.checkCredentials();
     this.doNotDisplayMessagesForOwner()
     if (name == "" || date == "" || deadline == "") {
       let required = document.getElementById("update-required");
@@ -68,6 +72,7 @@ export class ConferenceDetailsComponent implements OnInit {
   }
 
   addReviewer(userName): void {
+    this.userAuth.checkCredentials();
     this.doNotDisplayMessagesForOwner();
     if (userName == "") {
       let required = document.getElementById("add-reviewer-required");
@@ -81,6 +86,7 @@ export class ConferenceDetailsComponent implements OnInit {
   }
 
   attend(): void {
+    this.userAuth.checkCredentials();
     this.doNotDisplayMessagesForUser();
     this.route.params
         .switchMap((params: Params) => this.conferenceService.addAttender(params['name'], this.currentUser))
@@ -167,11 +173,35 @@ export class ConferenceDetailsComponent implements OnInit {
     attendanceFailure.style.display = "none";
   }
 
+  displayUploadStatus(status:number)
+  {
+    let uplodSuccess = document.getElementById("upload-success");
+    uplodSuccess.style.display="none";
+    if(status === 201)
+    {
+      uplodSuccess.style.display="block";
+    }
+  }
+
   gotToSubmit()
   {
     this.router.navigateByUrl("/paperadd/" + this.conference.name);
   }
+
+  addpaper(name, path) {
+    this.userAuth.checkCredentials();
+    if (name === "" || path === "") {
+      alert("All fields are mandatory!!");
+      return;
+    }
+
+    this.paperService.addPaper(this.conference.name, this.currentUser, name, path).subscribe(s => this.displayUploadStatus(s));
+
+  }
+  
+
   goToPapers(){
     this.router.navigateByUrl("/listpapers/"+this.conference.name);
+
   }
 }
