@@ -14,6 +14,9 @@ export class HomeComponent implements  OnInit{
   conferences: Conference[];
   // private current:string ="/";
   // private acti:string="bhome";
+  private currentUser:string;
+
+
   constructor(private conferenceService : ConferenceService,
               private router: Router,
               private authenticationService: AuthenticationService) {
@@ -21,6 +24,7 @@ export class HomeComponent implements  OnInit{
 
   ngOnInit() {
     this.authenticationService.checkCredentials();
+    this.currentUser = localStorage.getItem("user");
     this.listAll();
   }
 
@@ -34,6 +38,10 @@ export class HomeComponent implements  OnInit{
 
   goToConfView(name){
     this.router.navigateByUrl("/conferences/" + name);
+  }
+
+  goToPaperView(){
+    this.router.navigateByUrl("/listpapersforuser/" + this.currentUser);
   }
 
   // loadPage(data:string) {

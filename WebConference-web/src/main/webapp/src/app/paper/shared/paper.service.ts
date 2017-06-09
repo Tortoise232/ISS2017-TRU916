@@ -16,6 +16,7 @@ export class PaperService{
   private paperUrlUpload='http://localhost:8080/api/create';
   private papersUrl = 'http://localhost:8080/api/listpapers';
   private paperStatusChangeUrl= 'http://localhost:8080/api/paperchangestatus';
+  private papersForUserUrl = 'http://localhost:8080/api/listpapersforuser';
   private headers = new Headers({'Content-Type': 'application/json;charset=UTF-8'});
 
   constructor(private http:Http){}
@@ -94,6 +95,14 @@ export class PaperService{
       .map(this.extractData)
       .catch(this.handleError);
   }
+
+  findAllForUser(userName){
+    return this.http
+      .get(`${this.papersForUserUrl}/${userName}`, {headers: this.headers})
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
 }
 
 

@@ -77,6 +77,14 @@ public class PaperController {
         return new PapersDto(paperConverter.convertModelsToDtos(papers));
     }
 
+    @RequestMapping(value = "/listpapersforuser/{name}",method = RequestMethod.GET)
+    public PapersDto getPapersByUser(@PathVariable final String name){
+        log.trace("getPapersByUser: name={}", name);
+        List<Paper> papers = paperService.findAllByUser(name);
+        log.trace("getPapersByUser: papers={}", papers);
+        return new PapersDto(paperConverter.convertModelsToDtos(papers));
+    }
+
     @RequestMapping(value = "/paperchangestatus",method = RequestMethod.POST)
     public void changePaperStatus(@RequestBody final Map<String,String> paperName){
         log.trace("changePaperStatusController");

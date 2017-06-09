@@ -84,6 +84,16 @@ public class PaperServiceImpl implements PaperService {
 
     @Override
     @Transactional
+    public List<Paper> findAllByUser(String userName){
+        log.trace("findAllPapersByUser");
+        List<Paper> papers = paperRepository.findAll();
+        List<Paper> papersByUser = papers.stream().filter(p->p.getOwners().iterator().next().getUsername().equals(userName)).collect(Collectors.toList());
+        log.trace("findAllFromConf: papers={}",papersByUser);
+        return papersByUser;
+    }
+
+    @Override
+    @Transactional
     public void changePaperStatus(String paperName){
         log.trace("changePaperStatus");
         Paper paper = paperRepository.findAll().stream().filter(p->p.getName().equals(paperName)).findAny().get();

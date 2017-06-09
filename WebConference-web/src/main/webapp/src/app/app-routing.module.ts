@@ -11,6 +11,7 @@ import {ListConferenceComponent} from "./conference/conference-list/conference-l
 import {PaperAdd} from "./paper/paper-add/paper-add.component";
 import {WelcomePageComponent} from "./welcomepage/welcomepage.component";
 import {ListPaperComponent} from "./paper/paper-list/paper-list.component";
+import {ListPaperUserComponent} from "./paper/paper-list-for-user/paper-list-for-user.component";
 
 
 const routes: Routes = [
@@ -28,6 +29,7 @@ const routes: Routes = [
     { path:  'welcomepage', component: WelcomePageComponent},
     { path: 'paperadd/:name',component:PaperAdd},
     { path: 'listpapers/:name',component:ListPaperComponent},
+    { path: 'listpapersforuser/:name',component:ListPaperUserComponent}
 
 ];
 @NgModule({
