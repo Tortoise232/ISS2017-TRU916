@@ -190,13 +190,16 @@ export class ConferenceDetailsComponent implements OnInit {
 
   addpaper(name, path) {
     this.userAuth.checkCredentials();
-    if(name === "" || path === "" )
-    {
+    if (name === "" || path === "") {
       alert("All fields are mandatory!!");
       return;
     }
 
-    this.paperService.addPaper(this.conference.name, this.currentUser,name, path).subscribe(s=>this.displayUploadStatus(s));
+    this.paperService.addPaper(this.conference.name, this.currentUser, name, path).subscribe(s => this.displayUploadStatus(s));
+
+  }
+  
+
   goToPapers(){
     this.router.navigateByUrl("/listpapers/"+this.conference.name);
 

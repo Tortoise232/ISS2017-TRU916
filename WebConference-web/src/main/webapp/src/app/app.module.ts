@@ -33,9 +33,8 @@ import {ListPaperComponent} from "./paper/paper-list/paper-list.component";
     ProfileComponent,
     ConferenceDetailsComponent,
     PaperAdd,
-    WelcomePageComponent
+    WelcomePageComponent,
     ListPaperComponent
-
   ],
   imports: [
     BrowserModule,
