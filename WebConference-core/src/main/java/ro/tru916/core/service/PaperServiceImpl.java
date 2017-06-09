@@ -12,6 +12,9 @@ import ro.tru916.core.repository.ConferenceRepository;
 import ro.tru916.core.repository.PaperRepository;
 import ro.tru916.core.repository.UserRepository;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * Created by cata on 06.06.2017.
  */
@@ -59,4 +62,37 @@ public class PaperServiceImpl implements PaperService {
             throw  new RuntimeException("Problem at save");
         }
     }
+
+    @Override
+    @Transactional
+    public List<Paper> findAll(){
+        log.trace("findAllPapers");
+        List<Paper> papers = paperRepository.findAll();
+        log.trace("findAll: papers={}",papers);
+        return papers;
+    }
+
+    @Override
+    @Transactional
+    public List<Paper> findAllFromConference(String conferenceName){
+        log.trace("findAllPapersFromConf");
+        List<Paper> papers = paperRepository.findAll();
+        List<Paper> papersFromConf = papers.stream().filter(p->p.getPaper().getName().equals(conferenceName)).collect(Collectors.toList());
+        log.trace("findAllFromConf: papers={}",papersFromConf);
+        return papersFromConf;
+    }
+
+    @Override
+    @Transactional
+    public void changePaperStatus(String paperName){
+        log.trace("changePaperStatus");
+        Paper paper = paperRepository.findAll().stream().filter(p->p.getName().equals(paperName)).findAny().get();
+        if(paper.getAccepted()==null){
+            paper.setAccepted(paper.getPaper());
+        }
+        else{
+            paper.setAccepted(null);
+        }
+    }
+
 }

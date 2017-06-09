@@ -187,6 +187,7 @@ export class ConferenceDetailsComponent implements OnInit {
   {
     this.router.navigateByUrl("/paperadd/" + this.conference.name);
   }
+
   addpaper(name, path) {
     this.userAuth.checkCredentials();
     if(name === "" || path === "" )
@@ -196,6 +197,8 @@ export class ConferenceDetailsComponent implements OnInit {
     }
 
     this.paperService.addPaper(this.conference.name, this.currentUser,name, path).subscribe(s=>this.displayUploadStatus(s));
+  goToPapers(){
+    this.router.navigateByUrl("/listpapers/"+this.conference.name);
 
   }
 }

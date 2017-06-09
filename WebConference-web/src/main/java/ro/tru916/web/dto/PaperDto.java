@@ -3,23 +3,29 @@ package ro.tru916.web.dto;
 /**
  * Created by cata on 05.06.2017.
  */
-public class PaperDto {
+public class PaperDto extends BaseDto{
 
     private String name;
     private String user;
     private Float rating;
     private String path;
     private String conference;
+    private String status;
 
     public PaperDto() {
     }
 
-    public PaperDto(String name, String user, Float rating, String path, String conference) {
+    public PaperDto(String name, String user, Float rating, String path, String conference, String status) {
         this.name = name;
         this.user = user;
         this.rating = rating;
         this.path = path;
         this.conference = conference;
+        this.status = status;
+    }
+
+    public PaperDto(String name){
+        this.name = name;
     }
 
     public String getName() {
@@ -62,6 +68,14 @@ public class PaperDto {
         this.conference = conference;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -73,7 +87,8 @@ public class PaperDto {
         if (user != null ? !user.equals(paperDto.user) : paperDto.user != null) return false;
         if (rating != null ? !rating.equals(paperDto.rating) : paperDto.rating != null) return false;
         if (path != null ? !path.equals(paperDto.path) : paperDto.path != null) return false;
-        return conference != null ? conference.equals(paperDto.conference) : paperDto.conference == null;
+        if (conference != null ? !conference.equals(paperDto.conference) : paperDto.conference != null) return false;
+        return status != null ? status.equals(paperDto.status) : paperDto.status == null;
     }
 
     @Override
@@ -83,6 +98,7 @@ public class PaperDto {
         result = 31 * result + (rating != null ? rating.hashCode() : 0);
         result = 31 * result + (path != null ? path.hashCode() : 0);
         result = 31 * result + (conference != null ? conference.hashCode() : 0);
+        result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
     }
 
@@ -94,6 +110,7 @@ public class PaperDto {
                 ", rating=" + rating +
                 ", path='" + path + '\'' +
                 ", conference='" + conference + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 }

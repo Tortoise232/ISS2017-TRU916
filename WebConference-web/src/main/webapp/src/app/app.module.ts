@@ -19,6 +19,8 @@ import {ConferenceDetailsComponent} from "./conference/conference-details/confer
 import {PaperService} from "./paper/shared/paper.service";
 import {PaperAdd} from "./paper/paper-add/paper-add.component";
 import {WelcomePageComponent} from "./welcomepage/welcomepage.component";
+import {ListPaperComponent} from "./paper/paper-list/paper-list.component";
+
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import {WelcomePageComponent} from "./welcomepage/welcomepage.component";
     ConferenceDetailsComponent,
     PaperAdd,
     WelcomePageComponent
+    ListPaperComponent
+
   ],
   imports: [
     BrowserModule,
